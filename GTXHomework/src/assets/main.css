@@ -1,0 +1,83 @@
+@import './base.css';
+
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .form{
+    background: #e7eaf0;
+    width: 900px;
+    height: 700px;
+    font-weight: bold;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .results{
+    background:rgb(255, 255, 255);
+    padding: 1rem;
+    font-weight: bold;    
+  }
+
+  .orange{
+    background:rgb(214, 151, 78);
+  }
+
+  .blue{
+    background: rgb(184, 208, 231);
+  }
+
+  .buttonContainer{
+    display: flex;
+    justify-content: flex-end;
+    height: 35px;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .fullLength{
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+}
