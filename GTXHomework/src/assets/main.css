@@ -43,12 +43,18 @@ a,
   }
 
   .form{
+    display: inline-block;
     background: #e7eaf0;
     width: 900px;
     height: 700px;
     font-weight: bold;
     padding: 2rem;
     border-radius: 10px;
+  }
+
+  small{
+    display:flex;
+    justify-content: flex-end;
   }
 
   .results{
@@ -80,4 +86,5 @@ a,
     margin-bottom: 0.5rem;
   }
 
+  
 }
