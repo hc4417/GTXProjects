@@ -9,8 +9,10 @@ const route = useRoute()
 
 <!-- form -->
 <template> 
-  <div class = "backContainer">
-    <button class = "backButton" @click = "BackToLanding">Back to Login</button>
+  <div class = "backForthContainer">
+    <button class = "backForthButton" @click = "BackToLanding">Back to Login</button> 
+
+    <button class = "backForthButton" @click = "ForwardToProfile">Go to Profile</button>
   </div>
 
   <div class = "form" :class="{ shake: shakeForm }">
@@ -47,7 +49,7 @@ const route = useRoute()
     <div class = "buttonContainer">
     <button @click = "Cleared">Clear</button>
     <button type="button" @click = "Submitted">Submit</button> <br><br>
-    </div>
+  </div>
 
     <div class = "results">
 
@@ -121,6 +123,9 @@ export default {
     },
     BackToLanding(){
       this.$router.push('/')
+    },
+    ForwardToProfile(){
+      this.$router.push('/profile')
     }
   }
 }

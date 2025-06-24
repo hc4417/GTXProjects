@@ -129,7 +129,7 @@ a,
     height: 100%;
   }
 
-  .backButton{
+  .backForthButton{
     border: none;
     text-decoration: underline;
     text-decoration-color: white;
@@ -138,9 +138,9 @@ a,
     margin-bottom: 2px;
   }
 
-  .backContainer{
+  .backForthContainer{
     display:flex;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
 }
 
