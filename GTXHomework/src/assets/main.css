@@ -52,6 +52,16 @@ a,
     border-radius: 10px;
   }
 
+  .login-form{
+    display: inline-block;
+    background: #e7eaf0;
+    width: 600px;
+    height: 300px;
+    font-weight: bold;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
   small{
     display:flex;
     justify-content: flex-end;
@@ -86,5 +96,51 @@ a,
     margin-bottom: 0.5rem;
   }
 
-  
+  .passwordInput {
+    width: 100%;
+    padding-right: 70px; 
+    box-sizing: border-box;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .passwordWrapper{
+    position: relative;
+    width: 100%;
+  }
+
+  .visibilityButtonContainer{
+    display:flex;
+    justify-content: flex-end;
+  }
+
+  .visibilityButton{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-38%);
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #726f6f;
+    font-size: 0.9rem;
+    padding: 0;
+    height: 100%;
+  }
+
+  .backButton{
+    border: none;
+    text-decoration: underline;
+    text-decoration-color: white;
+    color: white;
+    background: none;
+    margin-bottom: 2px;
+  }
+
+  .backContainer{
+    display:flex;
+    justify-content: flex-start;
+  }
 }
+

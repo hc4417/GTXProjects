@@ -9,6 +9,10 @@ const route = useRoute()
 
 <!-- form -->
 <template> 
+  <div class = "backContainer">
+    <button class = "backButton" @click = "BackToLanding">Back to Login</button>
+  </div>
+
   <div class = "form" :class="{ shake: shakeForm }">
 
     First Name <br>
@@ -114,6 +118,9 @@ export default {
       this.form.currentCity ='';
       this.checked = false;
       this.submitted = false;
+    },
+    BackToLanding(){
+      this.$router.push('/')
     }
   }
 }

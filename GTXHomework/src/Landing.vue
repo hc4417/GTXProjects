@@ -1,23 +1,26 @@
 
 <template>
-<div class = "form">
+<div class = "login-form">
 
-    Username <br>
+    <br>Username <br>
     <input 
     v-model = "form.username" 
     class = "fullLength" 
     placeholder = "Enter your username"
     /> 
-    <div>
-    Password <br>
+    
+    <div class = "passwordWrapper">
+    <span style = "font-weight:bold;">Password</span><br>
+
     <input 
       :type = "password"
       v-model = "form.pswrd" 
       class = "fullLength" 
       placeholder = "Enter your password" 
     /> 
+  
+      <button class = "visibilityButton" @click = "toggleVisibility">{{visibility}}</button> 
 
-    <button @click = "toggleVisibility">{{visibility}}</button>   
     </div>
     
     <div class = "buttonContainer">
@@ -56,7 +59,14 @@ export default {
         this.form.pswrd.trim() === 'ABC123'
       ) {
         this.$router.push('/form')
-      } else{
+      } else if(
+        this.form.username.trim() === '' ||
+        this.form.pswrd.trim() === ''
+      ){
+        alert("Please fill out all fields.")
+      }else{
+        this.form.username ='';
+        this.form.pswrd ='';
         alert("Wrong username or password.")
       }
     },
