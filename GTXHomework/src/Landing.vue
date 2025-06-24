@@ -1,7 +1,6 @@
 
 <template>
 <div class = "login-form">
-
     <br>Username <br>
     <input 
     v-model = "form.username" 
