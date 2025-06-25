@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
     data(){
     const visibilityStatus= ['show', 'hide']
@@ -52,12 +54,19 @@ export default {
 
   },
   methods:{
+  ...mapMutations(['setUserId']),
+
     goToForm(){
       if (
         this.form.username.trim() === 'hchoi@corp.globetax.com' &&
         this.form.pswrd.trim() === 'ABC123'
       ) {
         this.$router.push('/form')
+
+        const loggedInUserId = this.form.username 
+
+        this.setUserId(loggedInUserId)
+
       } else if(
         this.form.username.trim() === '' ||
         this.form.pswrd.trim() === ''

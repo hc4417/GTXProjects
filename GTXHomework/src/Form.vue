@@ -82,6 +82,8 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data(){
     return{
@@ -99,7 +101,15 @@ export default {
       favoriteFoods: ['Tofu Stew', 'Salmon', 'Tom Yum']
     }
   },
+  computed: {
+    userId() {
+      return this.$store.state.userId
+    }
+  },
+  
   methods:{
+    ...mapActions(["saveProfile"]),
+
     Submitted(){
       if (
         this.form.firstName.trim() === '' ||
@@ -112,7 +122,14 @@ export default {
       }
 
       this.submitted = true
+      const profile= {
+        fullName :this.form.firstName + "" + this.form.lastName,
+        origin : this.form.hometown,
+        currentCity: this.form.currentCity
+      }
+      this.saveProfile({ userId: this.userId, profile})
     },
+
     Cleared(){
       this.form.firstName ='';
       this.form.lastName ='';
