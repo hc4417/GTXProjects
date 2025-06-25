@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 
+
 </script>
 
 <!-- form -->
@@ -12,12 +13,15 @@ const route = useRoute()
     <div class = "backForthContainer">
     <button class = "backForthButton" @click = "BackToLanding">Back to Login</button> 
 
-    <button class = "backForthButton" @click = "ForwardToProfile">Go to Profile</button>
   </div>
 
-    <div class = "form" :class="{ shake: shakeForm }">
+    <div class = "form">
+        
+        Username: {{userId}} <br>
+        Full Name: {{profile.fullName}} <br>
+        City of Origin: {{profile.origin}} <br>
+        Current City of Residence: {{profile.currentCity}}
 
-    
 
     </div>
 
@@ -25,18 +29,24 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
+import { mapState } from 'vuex'
+
 export default {
+
   data(){
     return{
       
     }
   },
+  computed: {
+        ...mapState({
+        userId: state => state.userId,
+        profile: state => state.profiles[state.userId] || {}
+    }),
+  },
   methods:{
     BackToLanding(){
       this.$router.push('/')
-    },
-    ForwardToProfile(){
-      this.$router.push('/profile')
     }
   }
 }

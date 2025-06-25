@@ -12,7 +12,6 @@ const route = useRoute()
   <div class = "backForthContainer">
     <button class = "backForthButton" @click = "BackToLanding">Back to Login</button> 
 
-    <button class = "backForthButton" @click = "ForwardToProfile">Go to Profile</button>
   </div>
 
   <div class = "form" :class="{ shake: shakeForm }">
@@ -123,11 +122,12 @@ export default {
 
       this.submitted = true
       const profile= {
-        fullName :this.form.firstName + "" + this.form.lastName,
+        fullName :this.form.firstName + " " + this.form.lastName,
         origin : this.form.hometown,
         currentCity: this.form.currentCity
       }
       this.saveProfile({ userId: this.userId, profile})
+      this.$router.push('/profile')
     },
 
     Cleared(){
@@ -141,9 +141,6 @@ export default {
     BackToLanding(){
       this.$router.push('/')
     },
-    ForwardToProfile(){
-      this.$router.push('/profile')
-    }
   }
 }
 

@@ -24,9 +24,9 @@ const store = createStore({
   },
   actions: {
     // action to add profile information, payload to add multiple arguments
-    addNewProfile({ commit }, payload) {
+    saveProfile({ commit }, payload) {
       // payload: { userId, profileData }
-      commit('addProfile', payload)
+      commit('setProfile', payload)
     }
   },
   //retrieves profile information

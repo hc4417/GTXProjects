@@ -136,6 +136,8 @@ a,
     color: white;
     background: none;
     margin-bottom: 2px;
+    cursor: pointer;
+
   }
 
   .backForthContainer{
