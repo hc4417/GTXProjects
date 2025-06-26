@@ -13,15 +13,23 @@ const route = useRoute()
     <div class = "backForthContainer">
     <button class = "backForthButton" @click = "BackToLanding">Back to Login</button> 
 
-  </div>
+    </div>
 
-    <div class = "form">
+    <div class = "profile-form">
         
-        Username: {{userId}} <br>
-        Full Name: {{profile.fullName}} <br>
-        City of Origin: {{profile.origin}} <br>
-        Current City of Residence: {{profile.currentCity}}
+        <div class = "profile-container">
+            <img v-if = userId src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\businessCat.jpg class = "profile-pic">
 
+            <div class = "profile-info">
+                Username: {{userId}} <br>
+                Full Name: {{profile.fullName}} <br>
+                City of Origin: {{profile.origin}} <br>
+                Current City of Residence: <p>{{profile.currentCity}} </p><br>
+                <p v-if=profile.dualCitizen><span style = "font-weight:bold;"> Dual citizen </span></p>
+                <img v-if = profile.dualCitizen src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\checkIcon.png class = "icon">
+            </div>
+
+        </div>
 
     </div>
 
@@ -32,7 +40,6 @@ const route = useRoute()
 import { mapState } from 'vuex'
 
 export default {
-
   data(){
     return{
       
@@ -41,7 +48,7 @@ export default {
   computed: {
         ...mapState({
         userId: state => state.userId,
-        profile: state => state.profiles[state.userId] || {}
+        profile: state => state.profiles[state.userId]
     }),
   },
   methods:{

@@ -1,18 +1,15 @@
 import { createStore } from 'vuex'
 
-// Create a new store instance.
-const store = createStore({
-  state () {
-    return {
-        // Create state object to store profiles
-        userId: null,
-        profiles:{
+export default createStore({
+    state () { // store data from app
+        return {
+            userId: null,
+            profiles:{
         
-        }
+            }
     }
   },
-  mutations: {
-    // Create mutation through which store objects can be added/changed
+  mutations: { // methods that change data in the state -- commit mutations
 
     setUserId(state, userId){
         state.userId = userId 
@@ -22,7 +19,8 @@ const store = createStore({
       state.profiles[userId] = profile
     }
   },
-  actions: {
+  actions: { // Can do async things like reach out to an api before changing data in state -- dispatch actions
+
     // action to add profile information, payload to add multiple arguments
     saveProfile({ commit }, payload) {
       // payload: { userId, profileData }
@@ -36,5 +34,3 @@ const store = createStore({
     }
   }
 })
-
-export default store

@@ -31,16 +31,16 @@ const route = useRoute()
       placeholder = "Last Name" 
       maxLength = "50"
     />
-    <small>{{form.firstName.length}}/50 characters</small>
+    <small>{{form.lastName.length}}/50 characters</small>
      
 
     Hometown <br>
     <input v-model = "form.hometown" class = "fullLength" placeholder = "Hometown"/>
-    <small>{{form.firstName.length}}/100 characters</small>
+    <small>{{form.hometown.length}}/100 characters</small>
 
     Current City <br>
     <input v-model = "form.currentCity" class = "fullLength" placeholder = "Current City"/>
-    <small>{{form.firstName.length}}/100 characters</small>
+    <small>{{form.currentCity.length}}/100 characters</small>
     
     <input type = "checkbox" id = "checkbox" v-model = "checked"/>
     <label for = "checkbox"> Dual Citizenship</label> 
@@ -124,7 +124,8 @@ export default {
       const profile= {
         fullName :this.form.firstName + " " + this.form.lastName,
         origin : this.form.hometown,
-        currentCity: this.form.currentCity
+        currentCity: this.form.currentCity,
+        dualCitizen: this.checked
       }
       this.saveProfile({ userId: this.userId, profile})
       this.$router.push('/profile')

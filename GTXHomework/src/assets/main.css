@@ -51,6 +51,43 @@ a,
     padding: 2rem;
     border-radius: 10px;
   }
+  
+  .profile-form{
+    background: #e7eaf0;
+    width: 600px;
+    height: 400px;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .profile-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    gap: 10px;
+  }
+
+  .profile-pic{
+    width: 40%;
+    height:auto;
+    display: block;
+    border: solid black 1px;
+  }
+
+  .icon{
+    width: 10%;
+    height: 20%;
+    display:inline-block;
+  }
+
+  .profile-info{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3rem;
+    font-weight: bold;
+  }
 
   .login-form{
     display: inline-block;
