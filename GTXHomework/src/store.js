@@ -27,8 +27,7 @@ export default createStore({
       commit('setProfile', payload)
     }
   },
-  //retrieves profile information
-  getters: {
+  getters: { //retrieves state information
     getProfile: (state) => (userId) => {
       return state.profiles[userId] || {}
     }

@@ -21,12 +21,12 @@ const route = useRoute()
             <img v-if = userId src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\businessCat.jpg class = "profile-pic">
 
             <div class = "profile-info">
-                Username: {{userId}} <br>
-                Full Name: {{profile.fullName}} <br>
-                City of Origin: {{profile.origin}} <br>
-                Current City of Residence: <p>{{profile.currentCity}} </p><br>
-                <p v-if=profile.dualCitizen><span style = "font-weight:bold;"> Dual citizen </span></p>
-                <img v-if = profile.dualCitizen src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\checkIcon.png class = "icon">
+                <p><span class = "label">Username: </span>{{userId}} </p>
+                 <p><span class = "label">Full Name:  </span>{{profile.fullName}}</p> 
+                <p><span class = "label">City of Origin:  </span> {{profile.origin}} </p>
+                <p><span class = "label">Current City of Residence:  </span> {{profile.currentCity}} </p>
+                <p v-if= "profile.dualCitizen"><span class = "label"> Dual citizen </span></p>
+                <img v-if = "profile.dualCitizen" src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\checkIcon.png class = "icon">
             </div>
 
         </div>

@@ -82,6 +82,9 @@ a,
     display:inline-block;
   }
 
+  .label{
+    font-weight:bold;
+  }
   .profile-info{
     display: flex;
     flex-wrap: wrap;
