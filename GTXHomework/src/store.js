@@ -1,35 +1,26 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
 
-export default createStore({
-    state () { // store data from app
-        return {
+export const useProfilesStore = defineStore('profiles', {
+    state: () => {
+        return{
             userId: null,
-            profiles:{
-        
+            profiles: {
+
             }
-    }
-  },
-  mutations: { // methods that change data in the state -- commit mutations
-
-    setUserId(state, userId){
-        state.userId = userId 
+        }
     },
-
-    setProfile(state, { userId, profile }) {
-      state.profiles[userId] = profile
-    }
-  },
-  actions: { // Can do async things like reach out to an api before changing data in state -- dispatch actions
-
-    // action to add profile information, payload to add multiple arguments
-    saveProfile({ commit }, payload) {
-      // payload: { userId, profileData }
-      commit('setProfile', payload)
-    }
-  },
-  getters: { //retrieves state information
-    getProfile: (state) => (userId) => {
-      return state.profiles[userId] || {}
-    }
-  }
+    actions:{
+        setUserId(userId){ //set user id
+            this.userId = userId
+        },
+        saveProfile(userId,profiles){ //save corresponding profile info to user id
+            this.profiles[userId] = profiles
+        }
+    },
+    getters:{
+        getProfile: (state) => (userId)=>{
+            state.profiles[userId]
+        }
+    }  
+ 
 })
