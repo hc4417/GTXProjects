@@ -29,7 +29,7 @@ export default createStore({
   },
   getters: { //retrieves state information
     getProfile: (state) => (userId) => {
-      return state.profiles[userId] || {}
+      return state.profiles[userId] 
     }
   }
 })

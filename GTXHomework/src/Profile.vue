@@ -37,6 +37,7 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
+import {mapState} from 'vuex'
 
 export default {
   data(){
@@ -45,13 +46,11 @@ export default {
     }
   },
   computed: {
-    userId(){
-        return this.$store.state.userId
-    },
+    ...mapState(['userId']),
     profile(){
-        return this.$store.getters.getProfile(this.userId)
+    return this.$store.getters.getProfile(this.userId)
     }
-  },
+},
   methods:{
     BackToLanding(){
       this.$router.push('/')
