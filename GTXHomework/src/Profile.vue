@@ -25,7 +25,7 @@ const route = useRoute()
                  <p><span class = "label">Full Name:  </span>{{profile.fullName}}</p> 
                 <p><span class = "label">City of Origin:  </span> {{profile.origin}} </p>
                 <p><span class = "label">Current City of Residence:  </span> {{profile.currentCity}} </p>
-                <p v-if= "profile.dualCitizen"><span class = "label"> Dual citizen </span></p>
+                <p v-if= "profile.dualCitizen"><span class = "label"> Dual citizen &nbsp;</span></p> 
                 <img v-if = "profile.dualCitizen" src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\checkIcon.png class = "icon">
             </div>
 
@@ -37,7 +37,6 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
-import { mapState } from 'vuex'
 
 export default {
   data(){
@@ -46,10 +45,12 @@ export default {
     }
   },
   computed: {
-        ...mapState({
-        userId: state => state.userId,
-        profile: state => state.profiles[state.userId]
-    }),
+    userId(){
+        return this.$store.state.userId
+    },
+    profile(){
+        return this.$store.getters.getProfile(this.userId)
+    }
   },
   methods:{
     BackToLanding(){
