@@ -1,7 +1,3 @@
-<script setup>
-  import {useProfilesStore} from '@/store'
-  const store = useProfilesStore()
-</script>
 
 <template>
 <div class = "login-form">
@@ -34,6 +30,7 @@
 </template>
 
 <script>
+import {useProfilesStore} from '@/store'
 
 export default {
     data(){
@@ -50,9 +47,13 @@ export default {
       passwordType,
       visPos,
       visibility: visibilityStatus[visPos],
-      password: passwordType[visPos]
+      password: passwordType[visPos],
+      store: null
     }
 
+  },
+  created(){
+    this.store = useProfilesStore()
   },
   methods:{
 
@@ -61,10 +62,8 @@ export default {
         this.form.username.trim() === 'hchoi@corp.globetax.com' &&
         this.form.pswrd.trim() === 'ABC123'
       ) {
+        this.store.setUserId(this.form.username)
         this.$router.push('/form')
-
-        const loggedInUserId = this.form.username 
-        store.setUserId(loggedInUserId)
 
       } else if(
         this.form.username.trim() === '' ||

@@ -1,14 +1,3 @@
-<script setup>
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import {useProfilesStore} from '@/store'
-
-const store = useProfilesStore()
-const router = useRouter()
-const route = useRoute()
-
-
-</script>
 
 <!-- form -->
 <template> 
@@ -39,9 +28,12 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
+import {useProfilesStore} from '@/store'
+
 export default {
   data(){
     return{
+        store: useProfilesStore()
     }
   },
   created(){
@@ -58,7 +50,7 @@ export default {
   },
   methods:{
     BackToLanding(){
-      this.$router.push('/')
+        this.$router.push('/')
     }
   }
 }

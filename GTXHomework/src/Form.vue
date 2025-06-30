@@ -128,7 +128,7 @@ export default {
         currentCity: this.form.currentCity,
         dualCitizen: this.checked
       }
-      this.store.saveProfile({ userId: this.store.userId, profile})
+      this.store.saveProfile(this.store.userId, profile)
       this.$router.push('/profile')
     },
 
