@@ -19,7 +19,7 @@ export const useProfilesStore = defineStore('profiles', {
     },
     getters:{
         getProfile: (state) => (userId)=>{
-            state.profiles[userId]
+            return state.profiles[userId]
         }
     }  
  

@@ -1,3 +1,7 @@
+<script setup>
+  import {useProfilesStore} from '@/store'
+  const store = useProfilesStore()
+</script>
 
 <template>
 <div class = "login-form">
@@ -30,7 +34,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 
 export default {
     data(){
@@ -43,18 +46,15 @@ export default {
         username:'',
         pswrd:'',
       },
-
       visibilityStatus,
       passwordType,
       visPos,
       visibility: visibilityStatus[visPos],
       password: passwordType[visPos]
-      
     }
 
   },
   methods:{
-  ...mapMutations(['setUserId']),
 
     goToForm(){
       if (
@@ -64,8 +64,7 @@ export default {
         this.$router.push('/form')
 
         const loggedInUserId = this.form.username 
-
-        this.setUserId(loggedInUserId)
+        store.setUserId(loggedInUserId)
 
       } else if(
         this.form.username.trim() === '' ||

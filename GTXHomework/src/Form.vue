@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {useProfilesStore} from '@/store'
 
 const router = useRouter()
 const route = useRoute()
@@ -81,8 +82,6 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   data(){
     return{
@@ -100,14 +99,16 @@ export default {
       favoriteFoods: ['Tofu Stew', 'Salmon', 'Tom Yum']
     }
   },
+  created(){
+    this.store = useProfilesStore()
+  },
   computed: {
     userId() {
-      return this.$store.state.userId
+      return this.store.userId
     }
   },
   
   methods:{
-    ...mapActions(["saveProfile"]),
 
     Submitted(){
       if (
@@ -127,7 +128,7 @@ export default {
         currentCity: this.form.currentCity,
         dualCitizen: this.checked
       }
-      this.saveProfile({ userId: this.userId, profile})
+      this.store.saveProfile({ userId: this.store.userId, profile})
       this.$router.push('/profile')
     },
 

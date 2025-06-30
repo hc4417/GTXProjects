@@ -1,7 +1,9 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {useProfilesStore} from '@/store'
 
+const store = useProfilesStore()
 const router = useRouter()
 const route = useRoute()
 
@@ -18,7 +20,7 @@ const route = useRoute()
     <div class = "profile-form">
         
         <div class = "profile-container">
-            <img v-if = userId src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\businessCat.jpg class = "profile-pic">
+            <img v-if = userId src = C:\Users\hchoi\GTXProjects\Projects\GTXHomework\src\assets\businessCat.jpg class = "profile-pic"> 
 
             <div class = "profile-info">
                 <p><span class = "label">Username: </span>{{userId}} </p>
@@ -37,19 +39,22 @@ const route = useRoute()
 
 <!--Data Retrieval + Button Method-->
 <script>
-import { mapState } from 'vuex'
-
 export default {
   data(){
     return{
-      
     }
   },
+  created(){
+    this.store = useProfilesStore()
+  },
   computed: {
-        ...mapState({
-        userId: state => state.userId,
-        profile: state => state.profiles[state.userId]
-    }),
+    userId() {
+        return this.store.userId
+    },
+    
+    profile(){
+        return this.store.getProfile(this.userId)
+    }
   },
   methods:{
     BackToLanding(){
