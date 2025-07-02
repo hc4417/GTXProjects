@@ -6,21 +6,29 @@ import {useProfilesStore} from '@/store'
 const router = useRouter()
 const route = useRoute()
 
-const form = ref([
-  {firstName: "", lastName: "", hometown:"", currentCity:""}
-])
+const form = ref({
+  firstName: "",
+  lastName: "",
+  hometown:"",
+  currentCity:""
+})
 const favoriteFoods = ref([
-  'Tofu stew', 'Salmon', 'Tom Yum'
+  'Tofu stew',
+  'Salmon',
+  'Tom Yum'
 ])
 const checked = ref(false)
 const submitted = ref(false)
+const userId = computed(()=>{
+  store.userId
+})
 
 const submitForm = () =>{
   if (
-        form.firstName.trim() === '' ||
-        form.lastName.trim() === '' ||
-        form.hometown.trim() === '' ||
-        form.currentCity.trim() === ''
+        form.value.firstName.trim() === '' ||
+        form.value.lastName.trim() === '' ||
+        form.value.hometown.trim() === '' ||
+        form.value.currentCity.trim() === ''
       ) {
         alert("Please fill out all fields before submitting.");
         return;
@@ -28,27 +36,26 @@ const submitForm = () =>{
 
       submitted.value = true
       const profile= {
-        fullName : form.firstName.value + " " + form.lastName.value,
-        origin : form.hometown.value,
-        currentCity: form.currentCity.value,
+        fullName : form.value.firstName + " " + form.value.lastName,
+        origin : form.value.hometown,
+        currentCity: form.value.currentCity,
         dualCitizen: checked.value
       }
 
-      this.store.saveProfile(this.store.userId, profile)
-      this.$router.push('/profile')
+      store.saveProfile(userId.value, profile)
+      router.push('/profile')
 }
-
 const clearForm = () =>{
-    form.firstName.value ='';
-    form.lastName.value ='';
-    form.hometown.value ='';
-    form.currentCity.value ='';
+    form.value.firstName ='';
+    form.value.lastName ='';
+    form.value.hometown ='';
+    form.value.currentCity ='';
     checked.value = false;
     submitted.value = false;
-
 }
-
-
+const BackToLanding = ()=>{
+  router.push('/')
+}
 </script>
 
 <!-- form -->
@@ -90,7 +97,7 @@ const clearForm = () =>{
     <label for = "checkbox"> Dual Citizenship</label> 
 
     <div class = "buttonContainer">
-    <button @click = "Cleared">Clear</button>
+    <button @click = "clearForm">Clear</button>
     <button type="button" @click = "submitForm">Submit</button> <br><br>
   </div>
 
@@ -122,75 +129,6 @@ const clearForm = () =>{
   </div>
 
 </template>
-
-<!--Data Retrieval + Button Method-->
-<script>
-export default {
-  data(){
-    return{
-      form: {
-        firstName:'',
-        lastName:'',
-        hometown:'',
-        currentCity:''
-      },
-
-      checked: false,
-      submitted:false,
-      shakeForm: false,
-
-      favoriteFoods: ['Tofu Stew', 'Salmon', 'Tom Yum']
-    }
-  },
-  created(){
-    this.store = useProfilesStore()
-  },
-  computed: {
-    userId() {
-      return this.store.userId
-    }
-  },
-  
-  methods:{
-
-    Submitted(){
-      if (
-        this.form.firstName.trim() === '' ||
-        this.form.lastName.trim() === '' ||
-        this.form.hometown.trim() === '' ||
-        this.form.currentCity.trim() === ''
-      ) {
-        alert("Please fill out all fields before submitting.");
-        return;
-      }
-
-      this.submitted = true
-      const profile= {
-        fullName :this.form.firstName + " " + this.form.lastName,
-        origin : this.form.hometown,
-        currentCity: this.form.currentCity,
-        dualCitizen: this.checked
-      }
-      this.store.saveProfile(this.store.userId, profile)
-      this.$router.push('/profile')
-    },
-
-    Cleared(){
-      this.form.firstName ='';
-      this.form.lastName ='';
-      this.form.hometown ='';
-      this.form.currentCity ='';
-      this.checked = false;
-      this.submitted = false;
-    },
-    BackToLanding(){
-      this.$router.push('/')
-    },
-  }
-}
-
-</script>
-
 
 <!-- CSS + Conditionals -->
 <style scoped>
