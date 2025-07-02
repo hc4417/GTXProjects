@@ -6,6 +6,49 @@ import {useProfilesStore} from '@/store'
 const router = useRouter()
 const route = useRoute()
 
+const form = ref([
+  {firstName: "", lastName: "", hometown:"", currentCity:""}
+])
+const favoriteFoods = ref([
+  'Tofu stew', 'Salmon', 'Tom Yum'
+])
+const checked = ref(false)
+const submitted = ref(false)
+
+const submitForm = () =>{
+  if (
+        form.firstName.trim() === '' ||
+        form.lastName.trim() === '' ||
+        form.hometown.trim() === '' ||
+        form.currentCity.trim() === ''
+      ) {
+        alert("Please fill out all fields before submitting.");
+        return;
+      }
+
+      submitted.value = true
+      const profile= {
+        fullName : form.firstName.value + " " + form.lastName.value,
+        origin : form.hometown.value,
+        currentCity: form.currentCity.value,
+        dualCitizen: checked.value
+      }
+
+      this.store.saveProfile(this.store.userId, profile)
+      this.$router.push('/profile')
+}
+
+const clearForm = () =>{
+    form.firstName.value ='';
+    form.lastName.value ='';
+    form.hometown.value ='';
+    form.currentCity.value ='';
+    checked.value = false;
+    submitted.value = false;
+
+}
+
+
 </script>
 
 <!-- form -->
@@ -48,7 +91,7 @@ const route = useRoute()
 
     <div class = "buttonContainer">
     <button @click = "Cleared">Clear</button>
-    <button type="button" @click = "Submitted">Submit</button> <br><br>
+    <button type="button" @click = "submitForm">Submit</button> <br><br>
   </div>
 
     <div class = "results">
