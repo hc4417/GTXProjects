@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {useProfilesStore} from '@/store'
 
+const store = useProfilesStore()
 const router = useRouter()
 const route = useRoute()
 
@@ -19,9 +20,9 @@ const favoriteFoods = ref([
 ])
 const checked = ref(false)
 const submitted = ref(false)
-const userId = computed(()=>{
+const userId = computed(()=>
   store.userId
-})
+)
 
 const submitForm = () =>{
   if (
