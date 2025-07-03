@@ -1,26 +1,24 @@
 <script setup>
-import {ref} from 'vue'
-import {useRouter} from 'vue-router'
+import {computed, ref} from 'vue'
+import {useRouter } from 'vue-router'
 import {useProfilesStore} from '@/store'
 
 const store = useProfilesStore()
 const router = useRouter()
 
-const visibilityStatus = ref([
+const visibilityStatus = [
   'show',
   'hide'
-])
-const passwordType = ref([
+]
+const passwordType = [
   'password',
   'text'
-])
+]
 const form = ref({
   username:'',
   pswrd: ''
 })
 const visPos = ref(0)
-const visibility = ref(visibilityStatus[visPos.value])
-const password = ref(passwordType[visPos.value])
 
 const goToForm = ()=>{
   if (
@@ -41,10 +39,14 @@ const goToForm = ()=>{
         alert("Wrong username or password.")
       }
 }
+const visibility = computed(()=>
+  visibilityStatus[visPos.value]
+)
+const password = computed(()=>
+  passwordType[visPos.value]
+)
 const toggleVisibility = () =>{
   visPos.value = (visPos.value + 1) % 2;
-  visibility.value = visibilityStatus[visPos.value]
-  password.value= passwordType[visPos.value]
 }
 </script>
 
