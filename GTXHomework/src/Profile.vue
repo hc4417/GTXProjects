@@ -1,3 +1,22 @@
+<script setup>
+import {computed, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {useProfilesStore} from '@/store'
+
+const store = useProfilesStore()
+const router = useRouter()
+
+const userId = computed(()=>
+  store.userId
+)
+const profile = computed(()=>
+  store.getProfile(userId.value)
+)
+const BackToLanding = ()=>{
+  router.push('/')
+}
+
+</script>
 
 <!-- form -->
 <template> 
@@ -25,38 +44,6 @@
     </div>
 
 </template>
-
-<!--Data Retrieval + Button Method-->
-<script>
-import {useProfilesStore} from '@/store'
-
-export default {
-  data(){
-    return{
-        store: useProfilesStore()
-    }
-  },
-  created(){
-    this.store = useProfilesStore()
-  },
-  computed: {
-    userId() {
-        return this.store.userId
-    },
-    
-    profile(){
-        return this.store.getProfile(this.userId)
-    }
-  },
-  methods:{
-    BackToLanding(){
-        this.$router.push('/')
-    }
-  }
-}
-
-</script>
-
 
 <!-- CSS + Conditionals -->
 <style scoped>
