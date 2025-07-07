@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {useProfilesStore} from '@/store'
+import TextInputField from './components/TextInputField.vue'
 
 const store = useProfilesStore()
 const router = useRouter()
@@ -67,33 +68,35 @@ const BackToLanding = ()=>{
   </div>
 
   <div class = "form" :class="{ shake: shakeForm }">
-
-    First Name <br>
-    <input 
-    v-model = "form.firstName" 
-    class = "fullLength" 
-    placeholder = "First Name"
-    /> 
-    <small>{{form.firstName.length}}/50 characters</small>
-
-    Last Name <br>
-    <input 
-      v-model = "form.lastName" 
-      class = "fullLength" 
-      placeholder = "Last Name" 
-      maxLength = "50"
-    />
-    <small>{{form.lastName.length}}/50 characters</small>
-     
-
-    Hometown <br>
-    <input v-model = "form.hometown" class = "fullLength" placeholder = "Hometown"/>
-    <small>{{form.hometown.length}}/100 characters</small>
-
-    Current City <br>
-    <input v-model = "form.currentCity" class = "fullLength" placeholder = "Current City"/>
-    <small>{{form.currentCity.length}}/100 characters</small>
     
+    <TextInputField
+      label = "First Name"
+      v-model = "form.firstName"
+      :maxLength = "50"
+      placeholder = "First Name"
+    />
+
+    <TextInputField
+      label = "Last Name"
+      v-model = "form.lastName"
+      :maxLength = "50"
+      placeholder = "Last Name"
+    />
+
+    <TextInputField
+      label = "Hometown"
+      v-model = "form.hometown"
+      :maxLength = "100"
+      placeholder = "Hometown"
+    />
+
+    <TextInputField
+      label = "Current City"
+      v-model = "form.currentCity"
+      :maxLength = "100"
+      placeholder = "Current City"
+    />
+
     <input type = "checkbox" id = "checkbox" v-model = "checked"/>
     <label for = "checkbox"> Dual Citizenship</label> 
 
