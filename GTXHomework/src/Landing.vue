@@ -2,6 +2,7 @@
 import {computed, ref} from 'vue'
 import {useRouter } from 'vue-router'
 import {useProfilesStore} from '@/store'
+import SubmitButton from './components/SubmitButton.vue'
 
 const store = useProfilesStore()
 const router = useRouter()
@@ -74,7 +75,10 @@ const toggleVisibility = () =>{
     </div>
     
     <div class = "buttonContainer">
-      <button @click="goToForm">Login</button>
+      <SubmitButton
+        label = "Login"
+        @click = "goToForm"
+      />
     </div> 
 </div>
 

@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {useProfilesStore} from '@/store'
 import TextInputField from './components/TextInputField.vue'
+import SubmitButton from './components/SubmitButton.vue'
 
 const store = useProfilesStore()
 const router = useRouter()
@@ -101,9 +102,12 @@ const BackToLanding = ()=>{
     <label for = "checkbox"> Dual Citizenship</label> 
 
     <div class = "buttonContainer">
-    <button @click = "clearForm">Clear</button>
-    <button type="button" @click = "submitForm">Submit</button> <br><br>
-  </div>
+      <button @click = "clearForm">Clear</button>
+      <SubmitButton
+        label = "Submit"
+        @click = "submitForm"
+      />
+      </div>
 
     <div class = "results">
 
