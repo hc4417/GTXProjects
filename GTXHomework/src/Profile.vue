@@ -1,17 +1,3 @@
-<script setup>
-import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useProfilesStore } from "@/store";
-
-const store = useProfilesStore();
-const router = useRouter();
-
-const userId = computed(() => store.userId);
-const profile = computed(() => store.getProfile(userId.value));
-const BackToLanding = () => {
-  router.push("/");
-};
-</script>
 
 <!-- form -->
 <template>
@@ -23,11 +9,7 @@ const BackToLanding = () => {
 
   <div class="profile-form">
     <div class="profile-container">
-      <img
-        v-if="userId"
-        src="/src/assets/businessCat.jpg"
-        class="profile-pic"
-      />
+      <img v-if="userId" src="./assets/businessCat.jpg" class="profile-pic" />
 
       <div class="profile-info">
         <p><span class="label">Username: </span>{{ userId }}</p>
@@ -42,13 +24,44 @@ const BackToLanding = () => {
         </p>
         <img
           v-if="profile.dualCitizen"
-          src="/src/assets/checkIcon.png"
+          src="./assets/checkIcon.png"
           class="icon"
         />
       </div>
     </div>
   </div>
 </template>
+
+<!--Data Retrieval + Button Method-->
+<script>
+import { useProfilesStore } from "@/store";
+
+export default {
+  data() {
+    return {
+      store: useProfilesStore(),
+    };
+  },
+  created() {
+    this.store = useProfilesStore();
+  },
+  computed: {
+    userId() {
+      return this.store.userId;
+    },
+
+    profile() {
+      return this.store.getProfile(this.userId);
+    },
+  },
+  methods: {
+    BackToLanding() {
+      this.$router.push("/");
+    },
+  },
+};
+</script>
+
 
 <!-- CSS + Conditionals -->
 <style scoped>
