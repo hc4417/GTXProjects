@@ -42,24 +42,6 @@ a,
     flex-wrap: wrap;
   }
 
-  .form {
-    display: inline-block;
-    background: #e7eaf0;
-    width: 900px;
-    height: 700px;
-    font-weight: bold;
-    padding: 2rem;
-    border-radius: 10px;
-  }
-
-  .profile-form {
-    background: #e7eaf0;
-    width: 600px;
-    height: 400px;
-    padding: 1rem;
-    border-radius: 10px;
-  }
-
   .profile-container {
     display: flex;
     justify-content: flex-start;
@@ -93,16 +75,6 @@ a,
     font-weight: bold;
   }
 
-  .login-form {
-    display: inline-block;
-    background: #e7eaf0;
-    width: 600px;
-    height: 300px;
-    font-weight: bold;
-    padding: 2rem;
-    border-radius: 10px;
-  }
-
   small {
     display: flex;
     justify-content: flex-end;
@@ -121,68 +93,93 @@ a,
   .blue {
     background: rgb(184, 208, 231);
   }
+}
 
-  .buttonContainer {
-    display: flex;
-    justify-content: flex-end;
-    height: 35px;
-    gap: 0.8rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+.center-container {
+  display: flex;
+  justify-content: center;
+}
 
-  .fullLength {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
+.login-form {
+  display: inline-block;
+  background: #e7eaf0;
+  width: 600px;
+  height: 300px;
+  font-weight: bold;
+  padding: 2rem;
+  border-radius: 10px;
+}
 
-  .passwordInput {
-    width: 100%;
-    padding-right: 70px;
-    box-sizing: border-box;
-    height: 40px;
-    font-size: 1rem;
-  }
+.fullLength {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 
-  .passwordWrapper {
-    position: relative;
-    width: 100%;
-  }
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
 
-  .visibilityButtonContainer {
-    display: flex;
-    justify-content: flex-end;
-  }
+.visibilityButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .visibilityButton {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-38%);
-    text-decoration: underline;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #726f6f;
-    font-size: 0.9rem;
-    padding: 0;
-    height: 100%;
-  }
+.visibilityButton {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-38%);
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #726f6f;
+  font-size: 0.9rem;
+  padding: 0;
+  height: 100%;
+}
 
-  .backForthButton {
-    border: none;
-    text-decoration: underline;
-    text-decoration-color: white;
-    color: white;
-    background: none;
-    margin-bottom: 2px;
-    cursor: pointer;
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  height: 35px;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
-  }
+.form {
+  display: inline-block;
+  background: #e7eaf0;
+  width: 900px;
+  height: 700px;
+  font-weight: bold;
+  padding: 2rem;
+  border-radius: 10px;
+}
 
-  .backForthContainer {
-    display: flex;
-    justify-content: space-between;
-  }
+.profile-form {
+  background: #e7eaf0;
+  width: 600px;
+  height: 400px;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.backForthButton {
+  border: none;
+  text-decoration: underline;
+  text-decoration-color: white;
+  color: white;
+  background: none;
+  margin-bottom: 2px;
+  cursor: pointer;
+
+}
+
+.backForthContainer {
+  display: flex;
+  justify-content: space-between;
 }

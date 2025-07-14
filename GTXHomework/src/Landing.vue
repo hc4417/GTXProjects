@@ -29,7 +29,6 @@ const goToForm = () => {
       class: "center-toast",
       message: "Please fill out all fields.",
       displayTime: 0,
-      position: "top center",
     });
   } else {
     form.value.username = "";
@@ -45,31 +44,33 @@ const toggleVisibility = () => {
 </script>
 
 <template>
-  <div class="login-form">
-    <br />Username <br />
-    <input
-      v-model="form.username"
-      class="fullLength"
-      placeholder="Enter your username"
-    />
-
-    <div class="passwordWrapper">
-      <span style="font-weight: bold">Password</span><br />
-
+  <div class="center-container">
+    <div class="login-form">
+      <br />Username <br />
       <input
-        :type="password"
-        v-model="form.pswrd"
+        v-model="form.username"
         class="fullLength"
-        placeholder="Enter your password"
+        placeholder="Enter your username"
       />
 
-      <button class="visibilityButton" @click="toggleVisibility">
-        {{ visibility }}
-      </button>
-    </div>
+      <div class="passwordWrapper">
+        <span style="font-weight: bold">Password</span><br />
 
-    <div class="buttonContainer">
-      <button @click="goToForm">Login</button>
+        <input
+          :type="password"
+          v-model="form.pswrd"
+          class="fullLength"
+          placeholder="Enter your password"
+        />
+
+        <button class="visibilityButton" @click="toggleVisibility">
+          {{ visibility }}
+        </button>
+      </div>
+
+      <div class="buttonContainer">
+        <button @click="goToForm">Login</button>
+      </div>
     </div>
   </div>
 </template>

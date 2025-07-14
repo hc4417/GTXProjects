@@ -65,69 +65,77 @@ const BackToLanding = () => {
     </button>
   </div>
 
-  <div class="form" :class="{ shake: shakeForm }">
-    First Name <br />
-    <input
-      v-model="form.firstName"
-      class="fullLength"
-      placeholder="First Name"
-    />
-    <small>{{ form.firstName.length }}/50 characters</small>
+  <div class="center-container">
+    <div class="form" :class="{ shake: shakeForm }">
+      First Name <br />
+      <input
+        v-model="form.firstName"
+        class="fullLength"
+        placeholder="First Name"
+      />
+      <small>{{ form.firstName.length }}/50 characters</small>
 
-    Last Name <br />
-    <input
-      v-model="form.lastName"
-      class="fullLength"
-      placeholder="Last Name"
-      maxLength="50"
-    />
-    <small>{{ form.lastName.length }}/50 characters</small>
+      Last Name <br />
+      <input
+        v-model="form.lastName"
+        class="fullLength"
+        placeholder="Last Name"
+        maxLength="50"
+      />
+      <small>{{ form.lastName.length }}/50 characters</small>
 
-    Hometown <br />
-    <input v-model="form.hometown" class="fullLength" placeholder="Hometown" />
-    <small>{{ form.hometown.length }}/100 characters</small>
+      Hometown <br />
+      <input
+        v-model="form.hometown"
+        class="fullLength"
+        placeholder="Hometown"
+      />
+      <small>{{ form.hometown.length }}/100 characters</small>
 
-    Current City <br />
-    <input
-      v-model="form.currentCity"
-      class="fullLength"
-      placeholder="Current City"
-    />
-    <small>{{ form.currentCity.length }}/100 characters</small>
+      Current City <br />
+      <input
+        v-model="form.currentCity"
+        class="fullLength"
+        placeholder="Current City"
+      />
+      <small>{{ form.currentCity.length }}/100 characters</small>
 
-    <input type="checkbox" id="checkbox" v-model="checked" />
-    <label for="checkbox"> Dual Citizenship</label>
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox"> Dual Citizenship</label>
 
-    <div class="buttonContainer">
-      <button @click="clearForm">Clear</button>
-      <button type="button" @click="submitForm">Submit</button> <br /><br />
-    </div>
+      <div class="buttonContainer">
+        <button @click="clearForm">Clear</button>
+        <button type="button" @click="submitForm">Submit</button> <br /><br />
+      </div>
 
-    <div class="results">
-      Result:
-      <!-- Version 1
+      <div class="results">
+        Result:
+        <!-- Version 1
         <div v-if = "submitted">
           
           <p>Hi, I am {{form.firstName}} {{form.lastName}}. I am originally from {{form.hometown}}, currently residing in {{form.currentCity}}.</p>
         </div>
         -->
 
-      <!-- Version 2-->
-      <div :class="{ blue: !checked, orange: checked }">
-        <p>
-          Hi, I am {{ form.firstName }} {{ form.lastName }}. I am originally
-          from {{ form.hometown }}, currently residing in
-          {{ form.currentCity }}.
-        </p>
+        <!-- Version 2-->
+        <div :class="{ blue: !checked, orange: checked }">
+          <p>
+            Hi, I am {{ form.firstName }} {{ form.lastName }}. I am originally
+            from {{ form.hometown }}, currently residing in
+            {{ form.currentCity }}.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <br />
-    Favorite Foods:
-    <div v-if="submitted">
-      <ol>
-        <li v-for="(food, index) in favoriteFoods" :key="index">{{ food }}</li>
-      </ol>
+      <br />
+      Favorite Foods:
+      <div v-if="submitted">
+        <ol>
+          <li v-for="(food, index) in favoriteFoods" :key="index">
+            {{ food }}
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </template>
