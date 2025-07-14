@@ -42,7 +42,7 @@ a,
     flex-wrap: wrap;
   }
 
-  .form{
+  .form {
     display: inline-block;
     background: #e7eaf0;
     width: 900px;
@@ -51,8 +51,8 @@ a,
     padding: 2rem;
     border-radius: 10px;
   }
-  
-  .profile-form{
+
+  .profile-form {
     background: #e7eaf0;
     width: 600px;
     height: 400px;
@@ -60,7 +60,7 @@ a,
     border-radius: 10px;
   }
 
-  .profile-container{
+  .profile-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -69,30 +69,31 @@ a,
     gap: 10px;
   }
 
-  .profile-pic{
+  .profile-pic {
     width: 40%;
-    height:auto;
+    height: auto;
     display: block;
     border: solid black 1px;
   }
 
-  .icon{
+  .icon {
     width: 10%;
     height: 20%;
-    display:inline-block;
+    display: inline-block;
   }
 
-  .label{
-    font-weight:bold;
+  .label {
+    font-weight: bold;
   }
-  .profile-info{
+
+  .profile-info {
     display: flex;
     flex-wrap: wrap;
     padding: 3rem;
     font-weight: bold;
   }
 
-  .login-form{
+  .login-form {
     display: inline-block;
     background: #e7eaf0;
     width: 600px;
@@ -102,26 +103,26 @@ a,
     border-radius: 10px;
   }
 
-  small{
-    display:flex;
+  small {
+    display: flex;
     justify-content: flex-end;
   }
 
-  .results{
-    background:rgb(255, 255, 255);
+  .results {
+    background: rgb(255, 255, 255);
     padding: 1rem;
-    font-weight: bold;    
+    font-weight: bold;
   }
 
-  .orange{
-    background:rgb(214, 151, 78);
+  .orange {
+    background: rgb(214, 151, 78);
   }
 
-  .blue{
+  .blue {
     background: rgb(184, 208, 231);
   }
 
-  .buttonContainer{
+  .buttonContainer {
     display: flex;
     justify-content: flex-end;
     height: 35px;
@@ -130,7 +131,7 @@ a,
     margin-bottom: 1rem;
   }
 
-  .fullLength{
+  .fullLength {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -138,23 +139,23 @@ a,
 
   .passwordInput {
     width: 100%;
-    padding-right: 70px; 
+    padding-right: 70px;
     box-sizing: border-box;
     height: 40px;
     font-size: 1rem;
   }
 
-  .passwordWrapper{
+  .passwordWrapper {
     position: relative;
     width: 100%;
   }
 
-  .visibilityButtonContainer{
-    display:flex;
+  .visibilityButtonContainer {
+    display: flex;
     justify-content: flex-end;
   }
 
-  .visibilityButton{
+  .visibilityButton {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -169,7 +170,7 @@ a,
     height: 100%;
   }
 
-  .backForthButton{
+  .backForthButton {
     border: none;
     text-decoration: underline;
     text-decoration-color: white;
@@ -180,9 +181,8 @@ a,
 
   }
 
-  .backForthContainer{
-    display:flex;
+  .backForthContainer {
+    display: flex;
     justify-content: space-between;
   }
 }
-

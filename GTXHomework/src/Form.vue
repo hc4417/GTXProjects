@@ -25,7 +25,11 @@ const submitForm = () => {
     form.value.hometown.trim() === "" ||
     form.value.currentCity.trim() === ""
   ) {
-    alert("Please fill out all fields before submitting.");
+    $.toast({
+      message: "Please fill out all fields before submitting.",
+      showProgress: "bottom",
+      classProgress: "red",
+    });
     return;
   }
 

@@ -25,7 +25,12 @@ const goToForm = () => {
     form.value.username.trim() === "" ||
     form.value.pswrd.trim() === ""
   ) {
-    alert("Please fill out all fields.");
+    $.toast({
+      class: "center-toast",
+      message: "Please fill out all fields.",
+      displayTime: 0,
+      position: "top center",
+    });
   } else {
     form.value.username = "";
     form.value.pswrd = "";
