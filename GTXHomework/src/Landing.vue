@@ -1,10 +1,11 @@
 <script setup>
 import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 
 const store = useProfilesStore();
 const router = useRouter();
+const route = useRoute();
 
 const visibilityStatus = ["show", "hide"];
 const passwordType = ["password", "text"];
@@ -13,6 +14,16 @@ const form = ref({
   pswrd: "",
 });
 const visPos = ref(0);
+const loginStatus = ref(localStorage.getItem("loginSuccess"));
+const userName = ref(localStorage.getItem("userName"));
+const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
+
+const logout = () => {
+  localStorage.setItem("loginSuccess", "false");
+  localStorage.setItem("userName", "");
+  loginStatus.value = "false";
+  userName.value = "";
+};
 
 const goToForm = () => {
   if (
@@ -33,7 +44,11 @@ const goToForm = () => {
   } else {
     form.value.username = "";
     form.value.pswrd = "";
-    alert("Wrong username or password.");
+    $.toast({
+      class: "center-toast",
+      message: "Wrong username or password.",
+      displayTime: 0,
+    });
   }
 };
 const visibility = computed(() => visibilityStatus[visPos.value]);
@@ -44,32 +59,42 @@ const toggleVisibility = () => {
 </script>
 
 <template>
-  <div class="center-container">
-    <div class="login-form">
-      <br />Username <br />
-      <input
-        v-model="form.username"
-        class="fullLength"
-        placeholder="Enter your username"
-      />
+  <router-view />
 
-      <div class="passwordWrapper">
-        <span style="font-weight: bold">Password</span><br />
-
+  <div v-if="!isNestedRoute">
+    <div class="backForthContainer">
+      <button class="backForthButton" @click="logout">Log out</button>
+    </div>
+    <div class="center-container">
+      <div class="login-form">
+        <br />Username <br />
         <input
-          :type="password"
-          v-model="form.pswrd"
+          v-model="form.username"
           class="fullLength"
-          placeholder="Enter your password"
+          placeholder="Enter your username"
         />
 
-        <button class="visibilityButton" @click="toggleVisibility">
-          {{ visibility }}
-        </button>
-      </div>
+        <div class="passwordWrapper">
+          <span style="font-weight: bold">Password</span><br />
 
-      <div class="buttonContainer">
-        <button @click="goToForm">Login</button>
+          <input
+            :type="password"
+            v-model="form.pswrd"
+            class="fullLength"
+            placeholder="Enter your password"
+          />
+
+          <button class="visibilityButton" @click="toggleVisibility">
+            {{ visibility }}
+          </button>
+        </div>
+
+        <div class="buttonContainer">
+          <router-link to="/loggedIn-profile" v-if="loginStatus === 'true'"
+            >Already logged in as {{ userName }}</router-link
+          >
+          <button @click="goToForm">Login</button>
+        </div>
       </div>
     </div>
   </div>

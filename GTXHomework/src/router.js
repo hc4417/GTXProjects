@@ -5,7 +5,16 @@ import Form from './Form.vue'
 import Profile from './Profile.vue'
 
 const routes = [
-  { path: '/', component: Landing },
+  {
+    path: '/',
+    component: Landing,
+    children: [
+      {
+        path: 'loggedIn-profile',
+        component: Profile,
+      }
+    ]
+  },
   { path: '/form', component: Form },
   { path: '/profile', component: Profile },
 ]
