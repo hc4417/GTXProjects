@@ -42,6 +42,8 @@ const submitForm = () => {
   };
 
   store.saveProfile(userId.value, profile);
+  localStorage.setItem("userName", form.value.firstName);
+  localStorage.setItem("loginSuccess", "true");
   router.push("/profile");
 };
 const clearForm = () => {
