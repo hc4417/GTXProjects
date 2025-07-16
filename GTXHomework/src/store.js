@@ -4,6 +4,7 @@ export const useProfilesStore = defineStore('profiles', {
     state: () => {
         return {
             userId: null,
+            loginSuccess: false,
             profiles: {
 
             }
@@ -15,6 +16,9 @@ export const useProfilesStore = defineStore('profiles', {
         },
         saveProfile(userId, profiles) { //save corresponding profile info to user id
             this.profiles[userId] = profiles
+        },
+        saveLoginStatus(loginSuccess) {
+            this.loginSuccess = loginSuccess
         }
     },
     getters: {

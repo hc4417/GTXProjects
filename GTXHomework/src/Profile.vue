@@ -49,7 +49,6 @@ export default {
     userId() {
       return this.store.userId;
     },
-
     profile() {
       return this.store.getProfile(this.userId);
     },

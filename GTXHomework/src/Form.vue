@@ -102,7 +102,6 @@ export default {
       return this.store.userId;
     },
   },
-
   methods: {
     Submitted() {
       if (
@@ -111,7 +110,12 @@ export default {
         this.form.hometown.trim() === "" ||
         this.form.currentCity.trim() === ""
       ) {
-        alert("Please fill out all fields before submitting.");
+        $.toast({
+          message: "Please fill out all fields.",
+          position: "top left",
+          showProgress: "bottom",
+          classProgress: "red",
+        });
         return;
       }
 
@@ -123,6 +127,8 @@ export default {
         dualCitizen: this.checked,
       };
       this.store.saveProfile(this.store.userId, profile);
+      localStorage.setItem("userName", this.form.firstName);
+      localStorage.setItem("loginSuccess", "true");
       this.$router.push("/profile");
     },
 
