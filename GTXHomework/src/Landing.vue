@@ -14,7 +14,7 @@ const form = ref({
   pswrd: "",
 });
 const visPos = ref(0);
-const loginStatus = ref(localStorage.getItem("loginSuccess"));
+const loginStatus = ref(localStorage.getItem("loginSuccess") === "true");
 const userName = ref(localStorage.getItem("userName"));
 const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
 
