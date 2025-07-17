@@ -1,7 +1,8 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
-
+const route = useRoute();
 const months = [
   "January",
   "February",
@@ -17,15 +18,25 @@ const months = [
   "December",
 ];
 
+const isNestedRoute = computed(() => route.name === "apptTimes");
+
 const home = () => {
   router.push("/");
 };
 const lookbook = () => {
   router.push("/nail-catalog");
 };
+const scheduleAppt = () => {
+  router.push("/calendar");
+};
+const redirectToApptTimes = (day) => {
+  let dateTime = new Date(2025, 6, day);
+  router.push(`/calendar/appointment/${dateTime}`);
+};
 </script>
 
 <template>
+  <router-view />
   <div
     class="ui visible sidebar vertical menu"
     style="
@@ -42,6 +53,7 @@ const lookbook = () => {
   </div>
   <div class="pusher">
     <div
+      v-if="!isNestedRoute"
       class="ui calendar"
       id="inline_calendar"
       style="padding-left: 15rem; width: 800px"
@@ -67,7 +79,7 @@ const lookbook = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="week">
             <td></td>
             <td></td>
             <td>1</td>
@@ -76,7 +88,7 @@ const lookbook = () => {
             <td>4</td>
             <td>5</td>
           </tr>
-          <tr>
+          <tr class="week">
             <td>6</td>
             <td>7</td>
             <td>8</td>
@@ -85,8 +97,8 @@ const lookbook = () => {
             <td>11</td>
             <td>12</td>
           </tr>
-          <tr>
-            <td>13</td>
+          <tr class="week">
+            <td class="clickable" @click="redirectToApptTimes(13)">13</td>
             <td>14</td>
             <td>15</td>
             <td>16</td>
@@ -94,7 +106,7 @@ const lookbook = () => {
             <td>18</td>
             <td>19</td>
           </tr>
-          <tr>
+          <tr class="week">
             <td>20</td>
             <td>21</td>
             <td>22</td>
@@ -103,7 +115,7 @@ const lookbook = () => {
             <td>25</td>
             <td>26</td>
           </tr>
-          <tr>
+          <tr class="week">
             <td>27</td>
             <td>28</td>
             <td>29</td>
@@ -117,3 +129,15 @@ const lookbook = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.week {
+  height: 70px;
+}
+td.clickable {
+  cursor: pointer;
+}
+td.clickable:hover {
+  background: rgba(176, 211, 241, 0.5);
+}
+</style>

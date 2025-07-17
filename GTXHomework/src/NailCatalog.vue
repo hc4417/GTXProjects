@@ -8,7 +8,7 @@ const home = () => {
   router.push("/");
 };
 const scheduleAppt = () => {
-  router.push("/scheduling");
+  router.push("/calendar");
 };
 </script>
 

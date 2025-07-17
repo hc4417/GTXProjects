@@ -6,6 +6,9 @@ export const useProfilesStore = defineStore('profiles', {
             userId: null,
             profiles: {
 
+            },
+            availablleDays: {
+
             }
         }
     },
