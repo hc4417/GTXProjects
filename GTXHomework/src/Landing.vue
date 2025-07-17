@@ -19,8 +19,8 @@ const userName = ref(localStorage.getItem("userName"));
 const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
 
 const logout = () => {
-  localStorage.setItem("loginSuccess", "false");
-  localStorage.setItem("userName", "");
+  localStorage.removeItem("loginSuccess");
+  localStorage.removeItem("userName");
   loginStatus.value = "false";
   userName.value = "";
 };
@@ -62,8 +62,10 @@ const toggleVisibility = () => {
   <router-view />
 
   <div v-if="!isNestedRoute">
-    <div class="backForthContainer">
-      <button class="backForthButton" @click="logout">Log out</button>
+    <div class="ui secondary mini clearing segment" style="clear: both">
+      <button class="ui red mini right floated button" @click="logout">
+        Log out
+      </button>
     </div>
     <div class="center-container">
       <div class="login-form">

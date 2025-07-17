@@ -1,0 +1,110 @@
+[
+    {
+        "id": 0,
+        "shape": "ballerina",
+        "charms": "✅",
+        "style": "gel",
+        "baseColor": "white",
+        "theme": "butterflies",
+        "picture": "/src/assets/nails/ballerina1.jpg"
+    },
+    {
+        "id": 1,
+        "shape": "coffin",
+        "charms": "✅",
+        "style": "gel",
+        "baseColor": "pink",
+        "theme": "peaches",
+        "picture": "/src/assets/nails/coffin1.jpeg"
+    },
+    {
+        "id": 2,
+        "shape": "almond",
+        "charms": "✅",
+        "style": "cat eye",
+        "baseColor": "pink",
+        "theme": "bows and hearts",
+        "picture": "/src/assets/nails/almond1.jpg"
+    },
+    {
+        "id": 3,
+        "shape": "coffin",
+        "charms": "❌",
+        "style": "gel",
+        "baseColor": "pink",
+        "theme": "clean",
+        "picture": "/src/assets/nails/coffin2.jpg"
+    },
+    {
+        "id": 4,
+        "shape": "stilleto",
+        "charms": "✅",
+        "style": "gel",
+        "baseColor": "translucent pearl",
+        "theme": "flowers and foliage",
+        "picture": "/src/assets/nails/stilleto1.jpg"
+    },
+    {
+        "id": 5,
+        "shape": "almond",
+        "charms": "❌",
+        "style": "cat eye",
+        "baseColor": "purple",
+        "theme": "clean",
+        "picture": "/src/assets/nails/almond2.jpg"
+    },
+    {
+        "id": 6,
+        "shape": "squoval",
+        "charms": "❌",
+        "style": "french tip",
+        "baseColor": "peach",
+        "theme": "clean",
+        "picture": "/src/assets/nails/squoval1.jpg"
+    },
+    {
+        "id": 7,
+        "shape": "square",
+        "charms": "✅",
+        "style": "gel",
+        "baseColor": "peach",
+        "theme": "flowers and foliage",
+        "picture": "/src/assets/nails/square1.jpg"
+    },
+    {
+        "id": 8,
+        "shape": "stilleto",
+        "charms": "❌",
+        "style": "french tip",
+        "baseColor": "periwinkle",
+        "theme": "butterflies",
+        "picture": "/src/assets/nails/stilleto2.jpg"
+    },
+    {
+        "id": 9,
+        "shape": "stilleto",
+        "charms": "✅",
+        "style": "french tip",
+        "baseColor": "peach",
+        "theme": "bows and hearts",
+        "picture": "/src/assets/nails/stilleto3.jpg"
+    },
+    {
+        "id": 10,
+        "shape": "square",
+        "charms": "❌",
+        "style": "french tip",
+        "baseColor": "magenta",
+        "theme": "flowers and foliage",
+        "picture": "/src/assets/nails/square2.jpg"
+    },
+    {
+        "id": 11,
+        "shape": "square",
+        "charms": "❌",
+        "style": "gel",
+        "baseColor": "green",
+        "theme": "clean",
+        "picture": "/src/assets/nails/square3.jpg"
+    }
+]
