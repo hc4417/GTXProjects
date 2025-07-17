@@ -11,20 +11,23 @@ const scheduleAppt = () => {
 
 <template>
   <div
-    class="ui visible sidebar"
+    class="ui visible sidebar vertical menu"
     style="
       background-color: white;
       width: 250px;
       display: flex;
-      justify-content: center;
-      padding-top: 3rem;
+      padding-top: 1rem;
+      padding-left: 0.5rem;
     "
   >
     <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
   </div>
   <div class="pusher">
     <div style="max-height: 80vh; overflow-y: auto">
-      <table class="ui celled striped table" style="width: 800px">
+      <table
+        class="ui celled striped table"
+        style="width: 800px; margin-left: 15rem"
+      >
         <thead>
           <tr>
             <th>Picture</th>
