@@ -4,6 +4,9 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+const home = () => {
+  router.push("/");
+};
 const scheduleAppt = () => {
   router.push("/scheduling");
 };
@@ -20,6 +23,8 @@ const scheduleAppt = () => {
       padding-left: 0.5rem;
     "
   >
+    <a class="home" @click="home">🏠 Home </a>
+    <a class="lookbook" @click="lookbook">📖 Lookbook</a>
     <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
   </div>
   <div class="pusher">

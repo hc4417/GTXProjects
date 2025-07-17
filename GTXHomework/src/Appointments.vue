@@ -1,4 +1,7 @@
 <script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
 const months = [
   "January",
   "February",
@@ -13,6 +16,13 @@ const months = [
   "November",
   "December",
 ];
+
+const home = () => {
+  router.push("/");
+};
+const lookbook = () => {
+  router.push("/nail-catalog");
+};
 </script>
 
 <template>
@@ -26,10 +36,16 @@ const months = [
       padding-left: 0.5rem;
     "
   >
+    <a class="home" @click="home">🏠 Home </a>
+    <a class="lookbook" @click="lookbook">📖 Lookbook</a>
     <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
   </div>
   <div class="pusher">
-    <div class="ui calendar" id="inline_calendar" style="margin-left: 15rem">
+    <div
+      class="ui calendar"
+      id="inline_calendar"
+      style="padding-left: 15rem; width: 800px"
+    >
       <table
         class="ui celled center aligned unstackable table day seven column"
       >
