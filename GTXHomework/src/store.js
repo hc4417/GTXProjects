@@ -7,9 +7,8 @@ export const useProfilesStore = defineStore('profiles', {
             profiles: {
 
             },
-            availablleDays: {
-
-            }
+            selectedDay: null,
+            selectedTime: null
         }
     },
     actions: {
@@ -18,7 +17,14 @@ export const useProfilesStore = defineStore('profiles', {
         },
         saveProfile(userId, profiles) { //save corresponding profile info to user id
             this.profiles[userId] = profiles
+        },
+        setSelectedDay(selectedDay) {
+            this.selectedDay = selectedDay
+        },
+        setSelectedTime(selectedTime) {
+            this.selectedTime = selectedTime
         }
+
     },
     getters: {
         getProfile: (state) => (userId) => {

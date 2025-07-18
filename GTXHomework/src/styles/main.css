@@ -85,6 +85,18 @@
   .blue {
     background: rgb(184, 208, 231);
   }
+
+  .confirmed {
+    background: rgb(174, 214, 162);
+  }
+
+  .unconfirmed {
+    background: rgb(243, 243, 243);
+  }
+
+  .pickedSlot {
+    background: rgba(252, 236, 193, 0.688);
+  }
 }
 
 .center-container {
@@ -180,4 +192,9 @@
 .lookbook,
 .home {
   padding-left: 1rem;
+  cursor: pointer;
+}
+
+.plainClick {
+  cursor: pointer;
 }
