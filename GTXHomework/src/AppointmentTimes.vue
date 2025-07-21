@@ -85,17 +85,31 @@ const redirectToPayment = () => {
       class="ui standard test modal transition visible active front"
       style="display: block !important"
     >
-      <div class="header">Review Appointment Details</div>
+      <div class="header">
+        Review Appointment Details <i class="user tie icon"></i>
+      </div>
       <div class="image content">
-        <div class="ui medium image"></div>
+        <div class="ui selection dropdown">
+          <input type="hidden" name="nail" />
+          <i class="dropdown icon"></i>
+          <div class="default text">Pet</div>
+          <div class="scrollhint menu">
+            <div class="item" data-value="0">blah</div>
+          </div>
+        </div>
         <!--replace w drop down of nail images?-->
-        <div class="description">
-          <div class="ui header">Date:</div>
+        <div class="description" style="padding-left: 10%">
+          <div class="ui header">
+            Date: July 13, 2025
+            <!--{{ Month }} {{ Day}} {{ Year }}-->
+          </div>
           <p>Time:</p>
-          <p>Confirm your appointment?</p>
         </div>
       </div>
       <div class="actions">
+        <span style="display: flex; justify-content: flex-end"
+          ><p>Confirm your appointment?</p></span
+        ><br />
         <button class="ui black deny button" @click="returnToCalendar">
           Cancel
         </button>
