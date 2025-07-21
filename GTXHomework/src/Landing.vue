@@ -31,7 +31,7 @@ const goToForm = () => {
     form.value.pswrd.trim() === "ABC123"
   ) {
     store.setUserId(form.value.username);
-    router.push("/form");
+    router.push("/calendar");
   } else if (
     form.value.username.trim() === "" ||
     form.value.pswrd.trim() === ""
@@ -68,7 +68,7 @@ const toggleVisibility = () => {
       </button>
     </div>
     <div class="center-container">
-      <div class="login-form">
+      <form class="login-form" autocomplete="autocomplete">
         <br />Username <br />
         <input
           v-model="form.username"
@@ -95,9 +95,12 @@ const toggleVisibility = () => {
           <router-link to="/loggedIn-profile" v-if="loginStatus"
             >Already logged in as {{ userName }}</router-link
           >
-          <button @click="goToForm">Login</button>
+          <button @click="goToForm">
+            Login
+            <i class="right chevron icon"></i>
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>

@@ -4,9 +4,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import './assets/jquery/jquery'
-import './assets/fomantic-ui/semantic.css'
-import './assets/fomantic-ui/semantic.js'
-
+import 'fomantic-ui/dist/semantic.css'
+import 'fomantic-ui/dist/semantic.js'
 import './styles/main.css'
 
 const pinia = createPinia()

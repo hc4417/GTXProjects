@@ -1,39 +1,84 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, reactive, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
+import nails from "@/nail-data.json";
 
 const store = useProfilesStore();
+const userId = computed(() => store.userId);
+const profile = computed(() => store.getProfile(userId.value));
 const router = useRouter();
+const route = useRoute();
 
 const timeSelected = ref(false);
 const paymentReview = ref(false);
 
+const datetimeParam = route.params.dateTime
+  ? atob(route.params.dateTime)
+  : null;
+const dateTimeObject = reactive(new Date(datetimeParam));
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const month = computed(() => monthNames[dateTimeObject.getMonth()]);
+const day = computed(() => dateTimeObject.getDate());
+const year = computed(() => dateTimeObject.getFullYear());
+const apptDate = month.value + " " + day.value + ", " + year.value;
+const setTime = ref(null);
+
 const returnToCalendar = () => {
   router.push("/calendar");
 };
-const timeSelect = () => {
+const timeSelect = (tempTime) => {
   timeSelected.value = !timeSelected.value;
+  setTime.value = tempTime;
 };
-const redirectToPayment = () => {
+const confirmSelection = () => {
   if (timeSelected.value) {
     paymentReview.value = true;
+
+    $("#confirmation-modal")
+      .modal({
+        onShow() {
+          $("#nail-style-dropdown").dropdown({});
+        },
+      })
+      .modal("show");
   }
 };
+
+const extractTimeForDisplay = computed(() => {
+  if (setTime.value === null) return "";
+
+  const dateTimeClone = new Date(dateTimeObject);
+  dateTimeClone.setHours(setTime.value);
+
+  const hours = dateTimeClone.getHours();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const convertHours = hours % 12 || 12;
+  return `${convertHours}:00 ${ampm}`;
+});
 </script>
 
 <template>
-  <div
-    class="ui calendar"
-    id="inline_calendar"
-    style="padding-left: 15rem; width: 800px"
-  >
+  <div class="ui calendar" style="padding-left: 15rem; width: 800px">
     <table class="ui celled center aligned unstackable table hour four column">
       <thead>
         <tr class="clickable" @click="returnToCalendar">
           <th colspan="4">
             <!--{{ Month }} {{ Day}} {{ Year }}-->
-            July 13, 2025
+            {{ dateTimeObject }}
           </th>
         </tr>
         <tr></tr>
@@ -49,7 +94,7 @@ const redirectToPayment = () => {
           <td class="unconfirmed" style="opacity: 0.5">1:00 PM</td>
           <td
             class="clickable"
-            @click="timeSelect"
+            @click="timeSelect(14)"
             :class="{ pickedSlot: timeSelected }"
           >
             2:00 PM
@@ -67,7 +112,7 @@ const redirectToPayment = () => {
               confirmed: timeSelected,
               plainClick: timeSelected,
             }"
-            @click="redirectToPayment"
+            @click="confirmSelection"
           >
             Select
           </td>
@@ -76,45 +121,38 @@ const redirectToPayment = () => {
     </table>
   </div>
 
-  <div
-    class="ui dimmer modals page transition visible active"
-    style="display: flex !important"
-    v-if="paymentReview"
-  >
-    <div
-      class="ui standard test modal transition visible active front"
-      style="display: block !important"
-    >
-      <div class="header">
-        Review Appointment Details <i class="user tie icon"></i>
+  <div id="confirmation-modal" class="ui small modal">
+    <div class="header">
+      Review Appointment Details
+      <div class="ui basic fitted segment">
+        <i class="user tie icon"></i>
+        {{ profile.fullName }}
       </div>
-      <div class="image content">
-        <div class="ui selection dropdown">
-          <input type="hidden" name="nail" />
-          <i class="dropdown icon"></i>
-          <div class="default text">Pet</div>
-          <div class="scrollhint menu">
-            <div class="item" data-value="0">blah</div>
+    </div>
+
+    <div class="content" style="display: flex">
+      <div class="ui selection dropdown" id="nail-style-dropdown">
+        <input type="hidden" name="nail" />
+        <i class="dropdown icon"></i>
+        <div class="default text">Nail Designs</div>
+        <div class="scrollhint menu">
+          <div class="item" v-for="nail in nails" :key="nail.id">
+            <img :src="nail.picture" />
           </div>
         </div>
-        <!--replace w drop down of nail images?-->
-        <div class="description" style="padding-left: 10%">
-          <div class="ui header">
-            Date: July 13, 2025
-            <!--{{ Month }} {{ Day}} {{ Year }}-->
-          </div>
-          <p>Time:</p>
+      </div>
+      <!--replace w drop down of nail images?-->
+      <div class="description">
+        <div class="ui header" style="padding-left: 10%">
+          Date: {{ apptDate }} <br />
+          Time: {{ extractTimeForDisplay }}
         </div>
+        <p></p>
       </div>
-      <div class="actions">
-        <span style="display: flex; justify-content: flex-end"
-          ><p>Confirm your appointment?</p></span
-        ><br />
-        <button class="ui black deny button" @click="returnToCalendar">
-          Cancel
-        </button>
-        <button class="ui positive right labeled icon button">Confirm</button>
-      </div>
+    </div>
+    <div class="actions">
+      <button class="ui primary ok button">Confirm</button>
+      <button class="ui cancel button" @click="returnToCalendar">Cancel</button>
     </div>
   </div>
 </template>
@@ -123,9 +161,11 @@ const redirectToPayment = () => {
 tr.clickable {
   cursor: pointer;
 }
+
 td.clickable {
   cursor: pointer;
 }
+
 td.clickable:hover {
   background: rgba(252, 236, 193, 0.688);
 }

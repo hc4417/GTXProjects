@@ -50,16 +50,16 @@
     border: solid black 1px;
   }
 
-  .icon {
+  /*.icon {
     width: 10%;
     height: 20%;
     display: inline-block;
-  }
+  }*/
 
-  .label {
+  /*.label {
     font-weight: bold;
   }
-
+*/
   .profile-info {
     display: flex;
     flex-wrap: wrap;

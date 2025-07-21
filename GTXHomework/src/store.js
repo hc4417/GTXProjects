@@ -14,12 +14,18 @@ export const useProfilesStore = defineStore('profiles', {
     actions: {
         setUserId(userId) { //set user id
             this.userId = userId
+
+            if (this.userId === 'hchoi@corp.globetax.com') {
+                this.saveProfile(this.userId, {
+                    fullName: 'Heather Choi',
+                    origin: 'form.value.hometown',
+                    currentCity: 'form.value.currentCity',
+                    dualCitizen: false,
+                })
+            }
         },
         saveProfile(userId, profiles) { //save corresponding profile info to user id
             this.profiles[userId] = profiles
-        },
-        setSelectedDay(selectedDay) {
-            this.selectedDay = selectedDay
         },
         setSelectedTime(selectedTime) {
             this.selectedTime = selectedTime

@@ -3,20 +3,6 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const isNestedRoute = computed(() => route.name === "apptTimes");
 
@@ -31,7 +17,8 @@ const scheduleAppt = () => {
 };
 const redirectToApptTimes = (day) => {
   let dateTime = new Date(2025, 6, day);
-  router.push(`/calendar/appointment/${dateTime}`);
+  let datetimeBase64 = btoa(dateTime);
+  router.push(`/calendar/appointment/${datetimeBase64}`);
 };
 </script>
 
@@ -51,6 +38,7 @@ const redirectToApptTimes = (day) => {
     <a class="lookbook" @click="lookbook">📖 Lookbook</a>
     <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
   </div>
+
   <div class="pusher">
     <div
       v-if="!isNestedRoute"
