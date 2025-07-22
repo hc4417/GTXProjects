@@ -12,11 +12,14 @@ const route = useRoute();
 
 const timeSelected = ref(false);
 const paymentReview = ref(false);
-
 const datetimeParam = route.params.dateTime
   ? atob(route.params.dateTime)
   : null;
-const dateTimeObject = reactive(new Date(datetimeParam));
+//Changes to reactive(date) will not trigger reactivity bc the date object is not a plain object -- treated diff
+const dateTimeObject = reactive({
+  dateTime: new Date(datetimeParam),
+});
+
 const monthNames = [
   "January",
   "February",
@@ -31,15 +34,12 @@ const monthNames = [
   "November",
   "December",
 ];
-const month = computed(() => monthNames[dateTimeObject.getMonth()]);
-const day = computed(() => dateTimeObject.getDate());
-const year = computed(() => dateTimeObject.getFullYear());
+const month = computed(() => monthNames[dateTimeObject.dateTime.getMonth()]);
+const day = computed(() => dateTimeObject.dateTime.getDate());
+const year = computed(() => dateTimeObject.dateTime.getFullYear());
 const apptDate = month.value + " " + day.value + ", " + year.value;
-const setTime = ref(null);
 
-const returnToCalendar = () => {
-  router.push("/calendar");
-};
+const setTime = ref(null);
 const timeSelect = (tempTime) => {
   timeSelected.value = !timeSelected.value;
   setTime.value = tempTime;
@@ -48,6 +48,8 @@ const confirmSelection = () => {
   if (timeSelected.value) {
     paymentReview.value = true;
 
+    dateTimeObject.dateTime.setHours(setTime.value);
+    dateTimeObject.dateTime = new Date(dateTimeObject.dateTime);
     $("#confirmation-modal")
       .modal({
         onShow() {
@@ -57,18 +59,17 @@ const confirmSelection = () => {
       .modal("show");
   }
 };
-
 const extractTimeForDisplay = computed(() => {
   if (setTime.value === null) return "";
-
-  const dateTimeClone = new Date(dateTimeObject);
-  dateTimeClone.setHours(setTime.value);
-
-  const hours = dateTimeClone.getHours();
+  const hours = dateTimeObject.dateTime.getHours();
   const ampm = hours >= 12 ? "PM" : "AM";
   const convertHours = hours % 12 || 12;
   return `${convertHours}:00 ${ampm}`;
 });
+
+const returnToCalendar = () => {
+  router.push("/calendar");
+};
 </script>
 
 <template>
@@ -77,8 +78,7 @@ const extractTimeForDisplay = computed(() => {
       <thead>
         <tr class="clickable" @click="returnToCalendar">
           <th colspan="4">
-            <!--{{ Month }} {{ Day}} {{ Year }}-->
-            {{ dateTimeObject }}
+            {{ apptDate }}
           </th>
         </tr>
         <tr></tr>
@@ -141,7 +141,6 @@ const extractTimeForDisplay = computed(() => {
           </div>
         </div>
       </div>
-      <!--replace w drop down of nail images?-->
       <div class="description">
         <div class="ui header" style="padding-left: 10%">
           Date: {{ apptDate }} <br />
@@ -161,11 +160,9 @@ const extractTimeForDisplay = computed(() => {
 tr.clickable {
   cursor: pointer;
 }
-
 td.clickable {
   cursor: pointer;
 }
-
 td.clickable:hover {
   background: rgba(252, 236, 193, 0.688);
 }
