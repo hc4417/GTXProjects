@@ -96,7 +96,7 @@ const toggleVisibility = () => {
           <router-link to="/loggedIn-profile" v-if="loginStatus"
             >Already logged in as {{ userName }}</router-link
           >
-          <button @click="goToForm">
+          <button @click.prevent="goToForm">
             Login
             <i class="right chevron icon"></i>
           </button>

@@ -16,7 +16,7 @@ const scheduleAppt = () => {
   router.push("/calendar");
 };
 
-// Handles selection of appointment day, loads AppointmentTimes.vue
+// Handles selection of appointment date, loads AppointmentTimes.vue
 const redirectToApptTimes = (day) => {
   let dateTime = new Date(2025, 6, day);
   let datetimeBase64 = btoa(dateTime);

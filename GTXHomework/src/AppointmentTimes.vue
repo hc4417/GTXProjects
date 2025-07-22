@@ -7,19 +7,22 @@ import nails from "@/nail-data.json";
 const store = useProfilesStore();
 const userId = computed(() => store.userId);
 const profile = computed(() => store.getProfile(userId.value));
+
 const router = useRouter();
 const route = useRoute();
+const returnToCalendar = () => {
+  router.push("/calendar");
+};
 
-const timeSelected = ref(false);
-const paymentReview = ref(false);
+// Appointment date setup
 const datetimeParam = route.params.dateTime
   ? atob(route.params.dateTime)
   : null;
-//Changes to reactive(date) will not trigger reactivity bc the date object is not a plain object -- treated diff
 const dateTimeObject = reactive({
   dateTime: new Date(datetimeParam),
 });
 
+// Formats and displays the selected appointment date as "Month Day, Year"
 const monthNames = [
   "January",
   "February",
@@ -37,17 +40,21 @@ const monthNames = [
 const month = computed(() => monthNames[dateTimeObject.dateTime.getMonth()]);
 const day = computed(() => dateTimeObject.dateTime.getDate());
 const year = computed(() => dateTimeObject.dateTime.getFullYear());
-const apptDate = month.value + " " + day.value + ", " + year.value;
+const apptDate = computed(() => `${month.value} ${day.value}, ${year.value}`);
 
+// Handles initial time selection
+const timeSelected = ref(false);
 const setTime = ref(null);
 const timeSelect = (tempTime) => {
   timeSelected.value = !timeSelected.value;
   setTime.value = tempTime;
 };
+
+// Triggers modal to review appointment details
+const apptReview = ref(false);
 const confirmSelection = () => {
   if (timeSelected.value) {
-    paymentReview.value = true;
-
+    apptReview.value = true;
     dateTimeObject.dateTime.setHours(setTime.value);
     dateTimeObject.dateTime = new Date(dateTimeObject.dateTime);
     $("#confirmation-modal")
@@ -59,6 +66,8 @@ const confirmSelection = () => {
       .modal("show");
   }
 };
+
+// Formats apppointment time
 const extractTimeForDisplay = computed(() => {
   if (setTime.value === null) return "";
   const hours = dateTimeObject.dateTime.getHours();
@@ -67,12 +76,37 @@ const extractTimeForDisplay = computed(() => {
   return `${convertHours}:00 ${ampm}`;
 });
 
-const returnToCalendar = () => {
-  router.push("/calendar");
+// Handles appointment confirmation & redirect
+//TODO: confirmation doesn't go through if nothing selected from dropdown
+const confirmAppt = () => {
+  timeSelected.value = !timeSelected.value;
+  setTime.value = null;
+  $.toast({
+    message: "Your appointment has been scheduled!",
+    displayTime: 0,
+    class: "white center-toast",
+    actions: [
+      {
+        text: "Continue browsing",
+        click: function () {
+          returnToCalendar();
+        },
+      },
+      {
+        text: "Log out",
+        class: "red",
+        click: function () {
+          router.push("/");
+        },
+      },
+    ],
+  });
 };
 </script>
 
 <template>
+  <!-- Table displaying available appointment times-->
+  <!-- TODO: change available times depending on DateTimeObject-->
   <div class="ui calendar" style="padding-left: 15rem; width: 800px">
     <table class="ui celled center aligned unstackable table hour four column">
       <thead>
@@ -121,6 +155,7 @@ const returnToCalendar = () => {
     </table>
   </div>
 
+  <!-- Modal confirming appointment details-->
   <div id="confirmation-modal" class="ui small modal">
     <div class="header">
       Review Appointment Details
@@ -129,7 +164,6 @@ const returnToCalendar = () => {
         {{ profile.fullName }}
       </div>
     </div>
-
     <div class="content" style="display: flex">
       <!--FIXME: dropdown breaks after navigating away from modal-->
       <div class="ui selection dropdown" id="nail-style-dropdown">
@@ -147,11 +181,10 @@ const returnToCalendar = () => {
           Date: {{ apptDate }} <br />
           Time: {{ extractTimeForDisplay }}
         </div>
-        <p></p>
       </div>
     </div>
     <div class="actions">
-      <button class="ui primary ok button">Confirm</button>
+      <button class="ui primary ok button" @click="confirmAppt">Confirm</button>
       <button class="ui cancel button" @click="returnToCalendar">Cancel</button>
     </div>
   </div>
