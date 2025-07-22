@@ -3,7 +3,6 @@ import nails from "@/nail-data.json";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
 const home = () => {
   router.push("/");
 };
@@ -23,9 +22,11 @@ const scheduleAppt = () => {
       padding-left: 0.5rem;
     "
   >
-    <a class="home" @click="home">🏠 Home </a>
-    <a class="lookbook" @click="lookbook">📖 Lookbook</a>
-    <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
+    <a class="home" @click="home"><i class="home icon"></i> Home </a>
+    <a class="lookbook" @click="lookbook"><i class="book icon"></i> Lookbook</a>
+    <a class="apptPage" @click="scheduleAppt"
+      ><i class="calendar alternate icon"></i> Schedule an Appointment</a
+    >
   </div>
   <div class="pusher">
     <div style="max-height: 80vh; overflow-y: auto">
