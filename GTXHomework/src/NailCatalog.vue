@@ -30,7 +30,7 @@ const scheduleAppt = () => {
     >
   </div>
 
-  <!--Table displaying nail data from nail-data.json-->
+  <!--Table displaying nail details from nail-data.json-->
   <div class="pusher">
     <div style="max-height: 80vh; overflow-y: auto">
       <table
@@ -47,7 +47,7 @@ const scheduleAppt = () => {
           </tr>
         </thead>
         <tbody>
-          <!--Loops through nails array to render each object's details-->
+          <!--Loop through nails array to render each object's details-->
           <tr v-for="nail in nails" :key="nail.id">
             <td>
               <img :src="nail.picture" style="width: 150px" />

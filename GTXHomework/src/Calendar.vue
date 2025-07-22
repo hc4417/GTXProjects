@@ -15,6 +15,8 @@ const lookbook = () => {
 const scheduleAppt = () => {
   router.push("/calendar");
 };
+
+// Handles selection of appointment day, loads AppointmentTimes.vue
 const redirectToApptTimes = (day) => {
   let dateTime = new Date(2025, 6, day);
   let datetimeBase64 = btoa(dateTime);
@@ -23,7 +25,10 @@ const redirectToApptTimes = (day) => {
 </script>
 
 <template>
+  <!-- Displays nested route component (AppointmentTimes.vue)-->
   <router-view />
+
+  <!--Sidebar menu with navigation links-->
   <div
     class="ui visible sidebar vertical menu"
     style="
@@ -31,14 +36,17 @@ const redirectToApptTimes = (day) => {
       width: 250px;
       display: flex;
       padding-top: 1rem;
-      padding-left: 0.5rem;
+      padding-left: 1rem;
     "
   >
-    <a class="home" @click="home">🏠 Home </a>
-    <a class="lookbook" @click="lookbook">📖 Lookbook</a>
-    <a class="apptPage" @click="scheduleAppt">✨ Schedule an Appointment</a>
+    <a class="home" @click="home"><i class="home icon"></i> Home </a>
+    <a class="lookbook" @click="lookbook"><i class="book icon"></i> Lookbook</a>
+    <a class="apptPage" @click="scheduleAppt"
+      ><i class="calendar alternate icon"></i> Schedule an Appointment</a
+    >
   </div>
 
+  <!-- Table displaying July 2025 calendar-->
   <div class="pusher">
     <div
       v-if="!isNestedRoute"
@@ -52,7 +60,7 @@ const redirectToApptTimes = (day) => {
         <thead>
           <tr>
             <th colspan="7">
-              <!--{{ Month }} {{ Year }}-->
+              <!--TODO: Add multiple months to reactively navigate through-->
               July 2025
             </th>
           </tr>

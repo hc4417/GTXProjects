@@ -60,9 +60,10 @@ const toggleVisibility = () => {
 </script>
 
 <template>
-  <!--Displays profile if already logged in-->
+  <!--Displays nested route component (Profile.vue)-->
   <router-view />
 
+  <!-- Login form-->
   <div v-if="!isNestedRoute">
     <div class="ui secondary mini clearing segment" style="clear: both">
       <button class="ui red mini right floated button" @click="logout">
