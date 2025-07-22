@@ -7,13 +7,10 @@ const store = useProfilesStore();
 const router = useRouter();
 const route = useRoute();
 
-const visibilityStatus = ["show", "hide"];
-const passwordType = ["password", "text"];
 const form = ref({
   username: "",
   pswrd: "",
 });
-const visPos = ref(0);
 const loginStatus = ref(localStorage.getItem("loginSuccess") === "true");
 const userName = ref(localStorage.getItem("userName"));
 const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
@@ -25,6 +22,7 @@ const logout = () => {
   userName.value = "";
 };
 
+// Handles login form submission
 const goToForm = () => {
   if (
     form.value.username.trim() === "hchoi@corp.globetax.com" &&
@@ -51,14 +49,18 @@ const goToForm = () => {
     });
   }
 };
-const visibility = computed(() => visibilityStatus[visPos.value]);
-const password = computed(() => passwordType[visPos.value]);
+
+// Toggle password visibility
+const visibilityStatus = ref(false); // false = hidden password
+const visibility = ref("show");
 const toggleVisibility = () => {
-  visPos.value = (visPos.value + 1) % 2;
+  visibilityStatus.value = !visibilityStatus.value;
+  visibility.value = visibilityStatus.value ? "hide" : "show";
 };
 </script>
 
 <template>
+  <!--Displays profile if already logged in-->
   <router-view />
 
   <div v-if="!isNestedRoute">
@@ -78,15 +80,13 @@ const toggleVisibility = () => {
 
         <div class="passwordWrapper">
           <span style="font-weight: bold">Password</span><br />
-
           <input
-            :type="password"
+            :type="visibilityStatus ? 'text' : 'password'"
             v-model="form.pswrd"
             class="fullLength"
             placeholder="Enter your password"
           />
-
-          <button class="visibilityButton" @click="toggleVisibility">
+          <button class="visibilityButton" @click.prevent="toggleVisibility">
             {{ visibility }}
           </button>
         </div>
@@ -104,6 +104,3 @@ const toggleVisibility = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-</style>
