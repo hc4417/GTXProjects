@@ -131,6 +131,7 @@ const returnToCalendar = () => {
     </div>
 
     <div class="content" style="display: flex">
+      <!--FIXME: dropdown breaks after navigating away from modal-->
       <div class="ui selection dropdown" id="nail-style-dropdown">
         <input type="hidden" name="nail" />
         <i class="dropdown icon"></i>

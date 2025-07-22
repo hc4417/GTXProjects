@@ -12,6 +12,7 @@ const scheduleAppt = () => {
 </script>
 
 <template>
+  <!--Sidebar menu with navigation links-->
   <div
     class="ui visible sidebar vertical menu"
     style="
@@ -28,6 +29,8 @@ const scheduleAppt = () => {
       ><i class="calendar alternate icon"></i> Schedule an Appointment</a
     >
   </div>
+
+  <!--Table displaying nail data from nail-data.json-->
   <div class="pusher">
     <div style="max-height: 80vh; overflow-y: auto">
       <table
@@ -44,6 +47,7 @@ const scheduleAppt = () => {
           </tr>
         </thead>
         <tbody>
+          <!--Loops through nails array to render each object's details-->
           <tr v-for="nail in nails" :key="nail.id">
             <td>
               <img :src="nail.picture" style="width: 150px" />
