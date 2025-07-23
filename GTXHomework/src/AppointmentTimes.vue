@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 import nails from "@/nail-data.json";
@@ -52,15 +52,23 @@ const timeSelect = (tempTime) => {
 
 // Triggers modal to review appointment details
 const apptReview = ref(false);
-const confirmSelection = () => {
+const confirmSelection = async () => {
   if (timeSelected.value) {
     apptReview.value = true;
     dateTimeObject.dateTime.setHours(setTime.value);
     dateTimeObject.dateTime = new Date(dateTimeObject.dateTime);
+
+    await nextTick();
+    $("#confirmation-modal").modal("destroy");
     $("#confirmation-modal")
       .modal({
         onShow() {
           $("#nail-style-dropdown").dropdown({});
+        },
+        onHidden() {
+          $("#nail-style-dropdown").dropdown("clear").dropdown("destroy");
+          //$(this).modal("destroy");
+          //$("#confirmation-modal").modal("destroy");
         },
       })
       .modal("show");
