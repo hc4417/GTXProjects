@@ -83,10 +83,10 @@
   .unconfirmed {
     background: rgb(243, 243, 243);
   }
+}
 
-  .picked-slot {
-    background: rgba(252, 236, 193, 0.688);
-  }
+.picked-slot {
+  background: rgba(252, 236, 193, 0.688);
 }
 
 .center-container {

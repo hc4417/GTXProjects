@@ -39,7 +39,7 @@ const goToForm = () => {
   ) {
     // FIXME: center-toast doesn't center the toast
     $.toast({
-      class: "center-toast",
+      position: "top center",
       message: "Please fill out all fields.",
       displayTime: 0,
     });
@@ -47,7 +47,7 @@ const goToForm = () => {
     form.value.username = "";
     form.value.pswrd = "";
     $.toast({
-      class: "center-toast",
+      position: "top center",
       message: "Wrong username or password.",
       displayTime: 0,
     });

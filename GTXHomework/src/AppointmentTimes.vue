@@ -53,6 +53,7 @@ const timeSelect = (tempTime) => {
 // Triggers modal to review appointment details
 const apptReview = ref(false);
 const confirmSelection = async () => {
+  // Checking if selected value exists
   if (timeSelected.value) {
     apptReview.value = true;
     dateTimeObject.dateTime.setHours(setTime.value);
@@ -91,9 +92,11 @@ const confirmAppt = () => {
   timeSelected.value = !timeSelected.value;
   setTime.value = null;
   $.toast({
+    position: "top center",
     message: "Your appointment has been scheduled!",
     displayTime: 0,
-    class: "white center-toast",
+    class: "white",
+    classActions: "center aligned",
     actions: [
       {
         text: "Continue browsing",
