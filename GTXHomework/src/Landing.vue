@@ -37,6 +37,7 @@ const goToForm = () => {
     form.value.username.trim() === "" ||
     form.value.pswrd.trim() === ""
   ) {
+    // FIXME: center-toast doesn't center the toast
     $.toast({
       class: "center-toast",
       message: "Please fill out all fields.",
