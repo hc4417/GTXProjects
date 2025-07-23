@@ -89,6 +89,7 @@ const extractTimeForDisplay = computed(() => {
 //TODO: confirmation doesn't go through if nothing selected from dropdown
 //TODO: all components on page are disabled when toast is active
 //TODO: center align message text without displacing buttons
+//TODO: make logout button functional
 const confirmAppt = () => {
   timeSelected.value = !timeSelected.value;
   setTime.value = null;

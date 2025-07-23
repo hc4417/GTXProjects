@@ -76,13 +76,21 @@
     background: rgb(184, 208, 231);
   }
 
-  .confirmed {
+  /*.confirmed {
     background: rgb(174, 214, 162);
   }
 
   .unconfirmed {
     background: rgb(243, 243, 243);
-  }
+  }*/
+}
+
+.confirmed {
+  background: rgb(174, 214, 162);
+}
+
+.unconfirmed {
+  background: rgb(243, 243, 243);
 }
 
 .picked-slot {
