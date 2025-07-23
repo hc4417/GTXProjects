@@ -50,16 +50,6 @@
     border: solid black 1px;
   }
 
-  /*.icon {
-    width: 10%;
-    height: 20%;
-    display: inline-block;
-  }*/
-
-  /*.label {
-    font-weight: bold;
-  }
-*/
   .profile-info {
     display: flex;
     flex-wrap: wrap;
@@ -94,7 +84,7 @@
     background: rgb(243, 243, 243);
   }
 
-  .pickedSlot {
+  .picked-slot {
     background: rgba(252, 236, 193, 0.688);
   }
 }
@@ -114,23 +104,18 @@
   border-radius: 10px;
 }
 
-.fullLength {
+.full-length {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.passwordWrapper {
+.password-wrapper {
   position: relative;
   width: 100%;
 }
 
-.visibilityButtonContainer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.visibilityButton {
+.visibility-button {
   position: absolute;
   top: 50%;
   right: 10px;
@@ -145,7 +130,7 @@
   height: 100%;
 }
 
-.buttonContainer {
+.button-container {
   display: flex;
   justify-content: flex-end;
   height: 35px;
@@ -172,7 +157,7 @@
   border-radius: 10px;
 }
 
-.backForthButton {
+.back-forth-button {
   border: none;
   text-decoration: underline;
   text-decoration-color: white;
@@ -183,7 +168,7 @@
 
 }
 
-.backForthContainer {
+.back-forth-container {
   display: flex;
   justify-content: space-between;
 }

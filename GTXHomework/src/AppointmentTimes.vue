@@ -90,7 +90,7 @@ const confirmAppt = () => {
       {
         text: "Continue browsing",
         click: function () {
-          returnToCalendar();
+          router.push("/nail-catalog");
         },
       },
       {
@@ -130,7 +130,7 @@ const confirmAppt = () => {
           <td
             class="clickable"
             @click="timeSelect(14)"
-            :class="{ pickedSlot: timeSelected }"
+            :class="{ 'picked-slot': timeSelected }"
           >
             2:00 PM
           </td>

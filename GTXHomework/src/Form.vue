@@ -1,23 +1,24 @@
 <script setup>
 import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 
 const store = useProfilesStore();
 const router = useRouter();
-const route = useRoute();
 
+// Form setup
 const form = ref({
   firstName: "",
   lastName: "",
   hometown: "",
   currentCity: "",
 });
-const favoriteFoods = ref(["Tofu stew", "Salmon", "Tom Yum"]);
 const checked = ref(false);
-const submitted = ref(false);
-const userId = computed(() => store.userId);
+const favoriteFoods = ref(["Tofu stew", "Salmon", "Tom Yum"]);
 
+// Handles form submission
+const userId = computed(() => store.userId);
+const submitted = ref(false);
 const submitForm = () => {
   if (
     form.value.firstName.trim() === "" ||
@@ -32,7 +33,6 @@ const submitForm = () => {
     });
     return;
   }
-
   submitted.value = true;
   const profile = {
     fullName: form.value.firstName + " " + form.value.lastName,
@@ -41,11 +41,14 @@ const submitForm = () => {
     dualCitizen: checked.value,
   };
 
+  // Stores login status and user's name
   store.saveProfile(userId.value, profile);
   localStorage.setItem("userName", form.value.firstName);
   localStorage.setItem("loginSuccess", "true");
   router.push("/profile");
 };
+
+// Clears form input fields
 const clearForm = () => {
   form.value.firstName = "";
   form.value.lastName = "";
@@ -54,15 +57,16 @@ const clearForm = () => {
   checked.value = false;
   submitted.value = false;
 };
-const BackToLanding = () => {
+
+const backToLanding = () => {
   router.push("/");
 };
 </script>
 
-<!-- form -->
+<!-- Form, collects user information -->
 <template>
-  <div class="backForthContainer">
-    <button class="backForthButton" @click="BackToLanding">
+  <div class="back-forth-container">
+    <button class="back-forth-button" @click="backToLanding">
       Back to Login
     </button>
   </div>
@@ -72,7 +76,7 @@ const BackToLanding = () => {
       First Name <br />
       <input
         v-model="form.firstName"
-        class="fullLength"
+        class="full-length"
         placeholder="First Name"
       />
       <small>{{ form.firstName.length }}/50 characters</small>
@@ -80,7 +84,7 @@ const BackToLanding = () => {
       Last Name <br />
       <input
         v-model="form.lastName"
-        class="fullLength"
+        class="full-length"
         placeholder="Last Name"
         maxLength="50"
       />
@@ -89,7 +93,7 @@ const BackToLanding = () => {
       Hometown <br />
       <input
         v-model="form.hometown"
-        class="fullLength"
+        class="full-length"
         placeholder="Hometown"
       />
       <small>{{ form.hometown.length }}/100 characters</small>
@@ -97,7 +101,7 @@ const BackToLanding = () => {
       Current City <br />
       <input
         v-model="form.currentCity"
-        class="fullLength"
+        class="full-length"
         placeholder="Current City"
       />
       <small>{{ form.currentCity.length }}/100 characters</small>
@@ -105,7 +109,7 @@ const BackToLanding = () => {
       <input type="checkbox" id="checkbox" v-model="checked" />
       <label for="checkbox"> Dual Citizenship</label>
 
-      <div class="buttonContainer">
+      <div class="button-container">
         <button @click="clearForm">Clear</button>
         <button type="button" @click="submitForm">Submit</button> <br /><br />
       </div>

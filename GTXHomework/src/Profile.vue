@@ -15,8 +15,8 @@ const BackToLanding = () => {
 
 <!-- form -->
 <template>
-  <div class="backForthContainer">
-    <button class="backForthButton" @click="BackToLanding">
+  <div class="back-forth-container">
+    <button class="back-forth-button" @click="BackToLanding">
       Back to Login
     </button>
   </div>

@@ -75,24 +75,24 @@ const toggleVisibility = () => {
         <br />Username <br />
         <input
           v-model="form.username"
-          class="fullLength"
+          class="full-length"
           placeholder="Enter your username"
         />
 
-        <div class="passwordWrapper">
+        <div class="password-wrapper">
           <span style="font-weight: bold">Password</span><br />
           <input
             :type="visibilityStatus ? 'text' : 'password'"
             v-model="form.pswrd"
-            class="fullLength"
+            class="full-length"
             placeholder="Enter your password"
           />
-          <button class="visibilityButton" @click.prevent="toggleVisibility">
+          <button class="visibility-button" @click.prevent="toggleVisibility">
             {{ visibility }}
           </button>
         </div>
 
-        <div class="buttonContainer">
+        <div class="button-container">
           <router-link to="/loggedIn-profile" v-if="loginStatus"
             >Already logged in as {{ userName }}</router-link
           >
