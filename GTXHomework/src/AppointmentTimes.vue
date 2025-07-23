@@ -88,6 +88,7 @@ const extractTimeForDisplay = computed(() => {
 // Handles appointment confirmation & redirect
 //TODO: confirmation doesn't go through if nothing selected from dropdown
 //TODO: all components on page are disabled when toast is active
+//TODO: center align message text without displacing buttons
 const confirmAppt = () => {
   timeSelected.value = !timeSelected.value;
   setTime.value = null;
