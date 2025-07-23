@@ -4,8 +4,9 @@ import { useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 
 const store = useProfilesStore();
-const router = useRouter();
+const userId = computed(() => store.userId);
 
+const router = useRouter();
 const backToLanding = () => {
   router.push("/");
 };
@@ -21,7 +22,6 @@ const checked = ref(false);
 const favoriteFoods = ref(["Tofu stew", "Salmon", "Tom Yum"]);
 
 // Handles form submission
-const userId = computed(() => store.userId);
 const submitted = ref(false);
 const submitForm = () => {
   if (

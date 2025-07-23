@@ -4,17 +4,20 @@ import { useRoute, useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 
 const store = useProfilesStore();
+
 const router = useRouter();
 const route = useRoute();
+const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
 
 const form = ref({
   username: "",
   pswrd: "",
 });
+
 const loginStatus = ref(localStorage.getItem("loginSuccess") === "true");
 const userName = ref(localStorage.getItem("userName"));
-const isNestedRoute = computed(() => route.path === "/loggedIn-profile");
 
+// Handles user logout
 const logout = () => {
   localStorage.removeItem("loginSuccess");
   localStorage.removeItem("userName");

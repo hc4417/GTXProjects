@@ -1,19 +1,19 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useProfilesStore } from "@/store";
 
 const store = useProfilesStore();
-const router = useRouter();
-
 const userId = computed(() => store.userId);
 const profile = computed(() => store.getProfile(userId.value));
+
+const router = useRouter();
 const BackToLanding = () => {
   router.push("/");
 };
 </script>
 
-<!-- form -->
+<!-- Profile card -->
 <template>
   <div class="back-forth-container">
     <button class="back-forth-button" @click="BackToLanding">
@@ -21,7 +21,7 @@ const BackToLanding = () => {
     </button>
   </div>
 
-  <div class="profile-form">
+  <div class="profile-card">
     <div class="profile-container">
       <img
         v-if="userId"

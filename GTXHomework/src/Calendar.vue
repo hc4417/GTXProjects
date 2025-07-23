@@ -1,11 +1,10 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 const router = useRouter();
 const route = useRoute();
-
 const isNestedRoute = computed(() => route.name === "apptTimes");
-
 const home = () => {
   router.push("/");
 };
@@ -130,9 +129,11 @@ const redirectToApptTimes = (day) => {
 .week {
   height: 70px;
 }
+
 td.clickable {
   cursor: pointer;
 }
+
 td.clickable:hover {
   background: rgba(176, 211, 241, 0.5);
 }
