@@ -6,6 +6,10 @@ import { useProfilesStore } from "@/store";
 const store = useProfilesStore();
 const router = useRouter();
 
+const backToLanding = () => {
+  router.push("/");
+};
+
 // Form setup
 const form = ref({
   firstName: "",
@@ -57,13 +61,8 @@ const clearForm = () => {
   checked.value = false;
   submitted.value = false;
 };
-
-const backToLanding = () => {
-  router.push("/");
-};
 </script>
 
-<!-- Form, collects user information -->
 <template>
   <div class="back-forth-container">
     <button class="back-forth-button" @click="backToLanding">
@@ -71,8 +70,9 @@ const backToLanding = () => {
     </button>
   </div>
 
+  <!-- Form, collects user information -->
   <div class="center-container">
-    <div class="form" :class="{ shake: shakeForm }">
+    <div class="form">
       First Name <br />
       <input
         v-model="form.firstName"
@@ -114,16 +114,19 @@ const backToLanding = () => {
         <button type="button" @click="submitForm">Submit</button> <br /><br />
       </div>
 
+      <!-- Displays form input back to user-->
       <div class="results">
         Result:
-        <!-- Version 1
+
+        <!-- Version 1: Displays form input upon submission-->
+        <!--
         <div v-if = "submitted">
           
           <p>Hi, I am {{form.firstName}} {{form.lastName}}. I am originally from {{form.hometown}}, currently residing in {{form.currentCity}}.</p>
         </div>
         -->
 
-        <!-- Version 2-->
+        <!-- Version 2: Displays form input reactively in real time, bg changes color depending on user's dual citizenship status-->
         <div :class="{ blue: !checked, orange: checked }">
           <p>
             Hi, I am {{ form.firstName }} {{ form.lastName }}. I am originally
@@ -132,8 +135,9 @@ const backToLanding = () => {
           </p>
         </div>
       </div>
-
       <br />
+
+      <!-- Lists favorite foods from hard coded array -->
       Favorite Foods:
       <div v-if="submitted">
         <ol>

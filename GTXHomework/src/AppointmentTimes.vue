@@ -195,9 +195,11 @@ const confirmAppt = () => {
 tr.clickable {
   cursor: pointer;
 }
+
 td.clickable {
   cursor: pointer;
 }
+
 td.clickable:hover {
   background: rgba(252, 236, 193, 0.688);
 }
