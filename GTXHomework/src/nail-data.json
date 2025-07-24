@@ -37,12 +37,12 @@
     },
     {
         "id": 4,
-        "shape": "stilleto",
+        "shape": "stiletto",
         "charms": "✅",
         "style": "gel",
         "baseColor": "translucent pearl",
         "theme": "flowers and foliage",
-        "picture": "/src/assets/nails/stilleto1.jpg"
+        "picture": "/src/assets/nails/stiletto1.jpg"
     },
     {
         "id": 5,
@@ -73,21 +73,21 @@
     },
     {
         "id": 8,
-        "shape": "stilleto",
+        "shape": "stiletto",
         "charms": "❌",
         "style": "french tip",
         "baseColor": "periwinkle",
         "theme": "butterflies",
-        "picture": "/src/assets/nails/stilleto2.jpg"
+        "picture": "/src/assets/nails/stiletto2.jpg"
     },
     {
         "id": 9,
-        "shape": "stilleto",
+        "shape": "stiletto",
         "charms": "✅",
         "style": "french tip",
         "baseColor": "peach",
         "theme": "bows and hearts",
-        "picture": "/src/assets/nails/stilleto3.jpg"
+        "picture": "/src/assets/nails/stiletto3.jpg"
     },
     {
         "id": 10,

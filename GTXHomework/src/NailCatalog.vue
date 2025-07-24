@@ -6,6 +6,9 @@ const router = useRouter();
 const home = () => {
   router.push("/");
 };
+const lookbook = () => {
+  router.push("/nail-catalog");
+};
 const scheduleAppt = () => {
   router.push("/calendar");
 };
