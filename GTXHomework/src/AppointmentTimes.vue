@@ -121,11 +121,11 @@ const confirmAppt = () => {
 <template>
   <!-- Table displaying available appointment times-->
   <!-- TODO: change available times depending on DateTimeObject-->
-  <div class="ui calendar" style="padding-left: 15rem; width: 800px">
+  <div style="padding-left: 15rem; width: 800px">
     <table class="ui celled center aligned unstackable table hour four column">
       <thead>
-        <tr class="clickable" @click="returnToCalendar">
-          <th colspan="4">
+        <tr @click="returnToCalendar">
+          <th class="clickable" colspan="4">
             {{ apptDate }}
           </th>
         </tr>
@@ -158,7 +158,6 @@ const confirmAppt = () => {
             :class="{
               unconfirmed: !timeSelected,
               confirmed: timeSelected,
-              plainClick: timeSelected,
             }"
             @click="confirmSelection"
           >
@@ -184,8 +183,14 @@ const confirmAppt = () => {
         <i class="dropdown icon"></i>
         <div class="default text">Nail Designs</div>
         <div class="scrollhint menu">
-          <div class="item" v-for="nail in nails" :key="nail.id">
+          <div
+            class="item"
+            v-for="nail in nails"
+            :key="nail.id"
+            style="display: flex"
+          >
             <img :src="nail.picture" />
+            <div>{{ nail.baseColor }} {{ nail.theme }}</div>
           </div>
         </div>
       </div>
@@ -204,14 +209,6 @@ const confirmAppt = () => {
 </template>
 
 <style scoped>
-tr.clickable {
-  cursor: pointer;
-}
-
-td.clickable {
-  cursor: pointer;
-}
-
 td.clickable:hover {
   background: rgba(252, 236, 193, 0.688);
 }

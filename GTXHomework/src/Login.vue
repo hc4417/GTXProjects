@@ -70,7 +70,7 @@ const toggleVisibility = () => {
   <div v-if="!isNestedRoute">
     <div class="ui secondary mini clearing segment" style="clear: both">
       <button class="ui red mini right floated button" @click="logout">
-        Log out
+        Sign out
       </button>
     </div>
     <div class="center-container">
@@ -84,13 +84,19 @@ const toggleVisibility = () => {
 
         <div class="password-wrapper">
           <span style="font-weight: bold">Password</span><br />
+          <!--TODO: Change input font size to match hidden password-->
           <input
             :type="visibilityStatus ? 'text' : 'password'"
             v-model="form.pswrd"
             class="full-length"
+            style="padding-right: 3rem"
             placeholder="Enter your password"
           />
-          <button class="visibility-button" @click.prevent="toggleVisibility">
+          <button
+            type="button"
+            class="visibility-button"
+            @click.prevent="toggleVisibility"
+          >
             {{ visibility }}
           </button>
         </div>
@@ -99,8 +105,8 @@ const toggleVisibility = () => {
           <router-link to="/loggedIn-profile" v-if="loginStatus"
             >Already logged in as {{ userName }}</router-link
           >
-          <button @click.prevent="goToForm">
-            Login
+          <button @click.prevent="goToForm" class="clickable">
+            Sign in
             <i class="right chevron icon"></i>
           </button>
         </div>

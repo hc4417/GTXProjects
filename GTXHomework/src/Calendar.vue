@@ -5,20 +5,21 @@ import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const isNestedRoute = computed(() => route.name === "apptTimes");
-const home = () => {
-  router.push("/");
-};
-const lookbook = () => {
-  router.push("/nail-catalog");
-};
-const scheduleAppt = () => {
-  router.push("/calendar");
-};
 
 // Handles user selection of appointment date, loads AppointmentTimes.vue
-const redirectToApptTimes = (day) => {
+/*const redirectToApptTimes = (day) => {
   let dateTime = new Date(2025, 6, day);
   let datetimeBase64 = btoa(dateTime);
+  router.push(`/calendar/appointment/${datetimeBase64}`);
+};*/
+
+//This ver. doesn't require day to be explicitly passed, function is easier to reuse
+const redirectToApptTimes = ($event) => {
+  let day = $event.currentTarget.innerText.trim();
+
+  let dateTime = new Date(2025, 6, day);
+  let datetimeBase64 = btoa(dateTime);
+
   router.push(`/calendar/appointment/${datetimeBase64}`);
 };
 </script>
@@ -28,31 +29,20 @@ const redirectToApptTimes = (day) => {
   <router-view />
 
   <!--Sidebar menu with navigation links-->
-  <div
-    class="ui visible sidebar vertical menu"
-    style="
-      background-color: white;
-      width: 250px;
-      display: flex;
-      padding-top: 1rem;
-      padding-left: 1rem;
-    "
-  >
-    <a class="home" @click="home"><i class="home icon"></i> Home </a>
-    <a class="lookbook" @click="lookbook"><i class="book icon"></i> Lookbook</a>
-    <a class="apptPage" @click="scheduleAppt"
-      ><i class="calendar alternate icon"></i> Schedule an Appointment</a
+  <div class="ui visible sidebar vertical menu">
+    <router-link to="/"><i class="home icon"></i> Home</router-link>
+    <router-link to="/nail-catalog"
+      ><i class="book icon"></i> Lookbook</router-link
+    >
+    <router-link to="/calendar"
+      ><i class="calendar alternate icon"></i> Schedule an
+      Appointment</router-link
     >
   </div>
 
   <!-- Table displaying July 2025 calendar-->
   <div class="pusher">
-    <div
-      v-if="!isNestedRoute"
-      class="ui calendar"
-      id="inline_calendar"
-      style="padding-left: 15rem; width: 800px"
-    >
+    <div v-if="!isNestedRoute" class="ui calendar" id="inline_calendar">
       <table
         class="ui celled center aligned unstackable table day seven column"
       >
@@ -93,7 +83,7 @@ const redirectToApptTimes = (day) => {
             <td>12</td>
           </tr>
           <tr class="week">
-            <td class="clickable" @click="redirectToApptTimes(13)">13</td>
+            <td class="clickable" @click="redirectToApptTimes">13</td>
             <td>14</td>
             <td>15</td>
             <td>16</td>
@@ -130,8 +120,9 @@ const redirectToApptTimes = (day) => {
   height: 70px;
 }
 
-td.clickable {
-  cursor: pointer;
+#inline_calendar {
+  padding-left: 15rem;
+  width: 800px;
 }
 
 td.clickable:hover {
