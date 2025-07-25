@@ -1,6 +1,11 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useProfilesStore } from "@/store";
+
+const store = useProfilesStore();
+const userId = computed(() => store.userId);
+const profile = computed(() => store.getProfile(userId.value));
 
 const router = useRouter();
 const route = useRoute();
@@ -37,6 +42,9 @@ const redirectToApptTimes = ($event) => {
     <router-link to="/calendar"
       ><i class="calendar alternate icon"></i> Schedule an
       Appointment</router-link
+    >
+    <router-link to="/profile" id="profile-link"
+      ><i class="user tie icon"></i> {{ profile?.fullName }}</router-link
     >
   </div>
 
@@ -97,7 +105,7 @@ const redirectToApptTimes = ($event) => {
             <td>22</td>
             <td>23</td>
             <td>24</td>
-            <td>25</td>
+            <td class="clickable" @click="redirectToApptTimes">25</td>
             <td>26</td>
           </tr>
           <tr class="week">
@@ -125,7 +133,7 @@ const redirectToApptTimes = ($event) => {
   width: 800px;
 }
 
-td.clickable:hover {
-  background: rgba(176, 211, 241, 0.5);
+td.clickable {
+  background: rgba(176, 211, 241, 0.9);
 }
 </style>

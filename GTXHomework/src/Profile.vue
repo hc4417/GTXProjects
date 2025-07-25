@@ -15,6 +15,22 @@ const BackToLanding = () => {
 
 <!-- Profile card -->
 <template>
+  <!--Temporary sidebar menu with navigation links-->
+  <div class="ui visible sidebar vertical menu">
+    <router-link to="/"><i class="home icon"></i> Home</router-link>
+    <router-link to="/nail-catalog"
+      ><i class="book icon"></i> Lookbook</router-link
+    >
+    <router-link to="/calendar"
+      ><i class="calendar alternate icon"></i> Schedule an
+      Appointment</router-link
+    >
+
+    <router-link to="/profile" id="profile-link"
+      ><i class="user tie icon"></i> {{ profile?.fullName }}</router-link
+    >
+  </div>
+
   <div class="back-forth-container">
     <button class="back-forth-button" @click="BackToLanding">
       Back to Login
@@ -23,11 +39,7 @@ const BackToLanding = () => {
 
   <div class="profile-card">
     <div class="profile-container">
-      <img
-        v-if="userId"
-        src="/src/assets/businessCat.jpg"
-        class="profile-pic"
-      />
+      <img src="/src/assets/businessCat.jpg" class="profile-pic" />
 
       <div class="profile-info">
         <p><span class="label">Username: </span>{{ userId }}</p>

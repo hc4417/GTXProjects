@@ -32,6 +32,8 @@ const goToForm = () => {
     form.value.pswrd.trim() === "ABC123"
   ) {
     store.setUserId(form.value.username);
+    localStorage.setItem("userName", "Heather Choi");
+    localStorage.setItem("loginSuccess", "true");
     router.push("/calendar");
   } else if (
     form.value.username.trim() === "" ||
@@ -79,6 +81,7 @@ const toggleVisibility = () => {
         <input
           v-model="form.username"
           class="full-length"
+          autocomplete="email"
           placeholder="Enter your username"
         />
 
@@ -89,6 +92,7 @@ const toggleVisibility = () => {
             :type="visibilityStatus ? 'text' : 'password'"
             v-model="form.pswrd"
             class="full-length"
+            autocomplete="current-password"
             style="padding-right: 3rem"
             placeholder="Enter your password"
           />

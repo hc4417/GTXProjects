@@ -11,6 +11,7 @@ const profile = computed(() => store.getProfile(userId.value));
 const router = useRouter();
 const route = useRoute();
 const returnToCalendar = () => {
+  clearAll();
   router.push("/calendar");
 };
 
@@ -37,32 +38,47 @@ const monthNames = [
   "November",
   "December",
 ];
-const month = computed(() => monthNames[dateTimeObject.dateTime.getMonth()]);
-const day = computed(() => dateTimeObject.dateTime.getDate());
-const year = computed(() => dateTimeObject.dateTime.getFullYear());
-const apptDate = computed(() => `${month.value} ${day.value}, ${year.value}`);
+
+// const month = computed(() => monthNames[dateTimeObject.dateTime.getMonth()]);
+// const day = computed(() => dateTimeObject.dateTime.getDate());
+// const year = computed(() => dateTimeObject.dateTime.getFullYear());
+
+const apptDate = computed(() => {
+  let month = monthNames[dateTimeObject?.dateTime.getMonth()];
+  let day = dateTimeObject?.dateTime.getDate();
+  let year = dateTimeObject?.dateTime.getFullYear();
+
+  return `${month} ${day}, ${year}`;
+});
+
+const clearAll = () => {
+  selectedTime.value = null;
+  dateTimeObject.dateTime = null; //TODO
+};
 
 // Handles initial time selection
-const timeSelected = ref(false);
-const setTime = ref(null);
+const isApptTimeSelected = ref(false);
+const selectedTime = ref(null);
 const timeSelect = (tempTime) => {
-  timeSelected.value = !timeSelected.value;
-  setTime.value = tempTime;
+  isApptTimeSelected.value = !isApptTimeSelected.value;
+  selectedTime.value = tempTime;
 };
 
 // Triggers modal to review appointment details
 const apptReview = ref(false);
 const confirmSelection = async () => {
   // Checking if selected value exists
-  if (timeSelected.value) {
+  if (isApptTimeSelected.value) {
     apptReview.value = true;
-    dateTimeObject.dateTime.setHours(setTime.value);
-    dateTimeObject.dateTime = new Date(dateTimeObject.dateTime);
+    //dateTimeObject.dateTime.setHours(selectedTime.value);
+    //dateTimeObject.dateTime = new Date(dateTimeObject.dateTime);
 
     await nextTick();
     $("#confirmation-modal").modal("destroy");
     $("#confirmation-modal")
       .modal({
+        // content: `Date: ${apptDate.value} <br>
+        // Time: ${extractTimeForDisplay.value}`,
         onShow() {
           $("#nail-style-dropdown").dropdown({});
         },
@@ -78,8 +94,9 @@ const confirmSelection = async () => {
 
 // Formats apppointment time
 const extractTimeForDisplay = computed(() => {
-  if (setTime.value === null) return "";
-  const hours = dateTimeObject.dateTime.getHours();
+  if (selectedTime.value === null) return "";
+  const hours = selectedTime.value;
+  //dateTimeObject.dateTime.getHours();
   const ampm = hours >= 12 ? "PM" : "AM";
   const convertHours = hours % 12 || 12;
   return `${convertHours}:00 ${ampm}`;
@@ -89,10 +106,11 @@ const extractTimeForDisplay = computed(() => {
 //TODO: confirmation doesn't go through if nothing selected from dropdown
 //TODO: all components on page are disabled when toast is active
 //TODO: center align message text without displacing buttons
-//TODO: make logout button functional
+//FIXME: formatting after dropdown selection is messed up
 const confirmAppt = () => {
-  timeSelected.value = !timeSelected.value;
-  setTime.value = null;
+  isApptTimeSelected.value = !isApptTimeSelected.value;
+  clearAll();
+
   $.toast({
     position: "top center",
     message: "Your appointment has been scheduled!",
@@ -110,11 +128,23 @@ const confirmAppt = () => {
         text: "Log out",
         class: "red",
         click: function () {
-          router.push("/");
+          logout();
         },
       },
     ],
   });
+};
+
+// Handles user logout
+const loginStatus = ref(localStorage.getItem("loginSuccess") === "true");
+const userName = ref(localStorage.getItem("userName"));
+
+const logout = () => {
+  localStorage.removeItem("loginSuccess");
+  localStorage.removeItem("userName");
+  loginStatus.value = "false";
+  userName.value = "";
+  router.push("/");
 };
 </script>
 
@@ -143,7 +173,7 @@ const confirmAppt = () => {
           <td
             class="clickable"
             @click="timeSelect(14)"
-            :class="{ 'picked-slot': timeSelected }"
+            :class="{ 'picked-slot': isApptTimeSelected }"
           >
             2:00 PM
           </td>
@@ -156,8 +186,8 @@ const confirmAppt = () => {
           <td></td>
           <td
             :class="{
-              unconfirmed: !timeSelected,
-              confirmed: timeSelected,
+              unconfirmed: !isApptTimeSelected,
+              confirmed: isApptTimeSelected,
             }"
             @click="confirmSelection"
           >
@@ -174,7 +204,7 @@ const confirmAppt = () => {
       Review Appointment Details
       <div class="ui basic fitted segment">
         <i class="user tie icon"></i>
-        {{ profile.fullName }}
+        {{ profile?.fullName }}
       </div>
     </div>
     <div class="content" style="display: flex">
@@ -189,8 +219,8 @@ const confirmAppt = () => {
             :key="nail.id"
             style="display: flex"
           >
-            <img :src="nail.picture" />
-            <div>{{ nail.baseColor }} {{ nail.theme }}</div>
+            <img class="ui avatar image" :src="nail.picture" />
+            <div>{{ nail.baseColor }}-{{ nail.theme }}</div>
           </div>
         </div>
       </div>
@@ -208,8 +238,12 @@ const confirmAppt = () => {
   </div>
 </template>
 
-<style scoped>
-td.clickable:hover {
-  background: rgba(252, 236, 193, 0.688);
+<style>
+.dropdown.icon {
+  color: blue !important;
+}
+
+#nail-style-dropdown {
+  width: 400px;
 }
 </style>

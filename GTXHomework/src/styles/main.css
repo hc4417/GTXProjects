@@ -186,10 +186,27 @@
   cursor: pointer
 }
 
+td.clickable:hover {
+  background: rgba(252, 236, 193, 0.688);
+}
+
+
+/*
+td.clickable:hover {
+  background: rgba(176, 211, 241, 0.5);
+}*/
+
 .ui.visible.sidebar.vertical.menu {
   background-color: white;
   width: 250px;
   display: flex;
   padding-top: 1rem;
   padding-left: 1rem;
+}
+
+#profile-link {
+  margin-top: auto;
+  /* pushes it to the bottom */
+  padding: 1rem 0 1rem 0;
+  border-top: 1px solid #ddd;
 }
