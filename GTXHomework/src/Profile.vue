@@ -31,11 +31,11 @@ const BackToLanding = () => {
     >
   </div>
 
-  <div class="back-forth-container">
+  <!-- <div class="back-forth-container">
     <button class="back-forth-button" @click="BackToLanding">
       Back to Login
     </button>
-  </div>
+  </div> -->
 
   <div class="profile-card">
     <div class="profile-container">
