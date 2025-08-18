@@ -8,9 +8,9 @@ const userId = computed(() => store.userId);
 const profile = computed(() => store.getProfile(userId.value));
 
 const router = useRouter();
-const BackToLanding = () => {
-  router.push("/");
-};
+// const BackToLanding = () => {
+//   router.push("/");
+// };
 </script>
 
 <!-- Profile card -->

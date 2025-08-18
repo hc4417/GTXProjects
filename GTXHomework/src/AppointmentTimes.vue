@@ -77,8 +77,9 @@ const confirmSelection = async () => {
     $("#confirmation-modal").modal("destroy");
     $("#confirmation-modal")
       .modal({
-        // content: `Date: ${apptDate.value} <br>
-        // Time: ${extractTimeForDisplay.value}`,
+        // Temporary fix to dateTime issue
+        content: `Date: ${apptDate.value} <br>
+         Time: ${extractTimeForDisplay.value}`,
         onShow() {
           $("#nail-style-dropdown").dropdown({});
         },

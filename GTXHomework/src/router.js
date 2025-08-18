@@ -6,6 +6,7 @@ import Profile from './Profile.vue'
 import NailCatalog from './NailCatalog.vue'
 import Calendar from './Calendar.vue'
 import AppointmentTimes from './AppointmentTimes.vue'
+import Playground from './Playground.vue'
 
 const routes = [
   {
@@ -36,6 +37,10 @@ const routes = [
   {
     path: '/appointment-times',
     component: AppointmentTimes
+  },
+  {
+    path: '/playground',
+    component: Playground
   }
 ]
 

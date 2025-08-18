@@ -42,7 +42,7 @@ const goToForm = () => {
     $.toast({
       position: "top center",
       message: "Please fill out all fields.",
-      displayTime: 0,
+      displayTime: 1000,
     });
   } else {
     form.value.username = "";
@@ -50,7 +50,7 @@ const goToForm = () => {
     $.toast({
       position: "top center",
       message: "Wrong username or password.",
-      displayTime: 0,
+      displayTime: 1000,
     });
   }
 };

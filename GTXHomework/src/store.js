@@ -18,8 +18,8 @@ export const useProfilesStore = defineStore('profiles', {
             if (this.userId === 'hchoi@corp.globetax.com') {
                 this.saveProfile(this.userId, {
                     fullName: 'Heather Choi',
-                    origin: 'form.value.hometown',
-                    currentCity: 'form.value.currentCity',
+                    origin: 'LTown',
+                    currentCity: 'NYC',
                     dualCitizen: false,
                 })
             }
