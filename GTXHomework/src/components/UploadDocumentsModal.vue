@@ -1,20 +1,14 @@
 <script setup>
-import { ref, nextTick, defineProps, defineEmits } from "vue";
+import { ref, defineProps } from "vue";
 
 const props = defineProps({
   selectedBeneficialOwner: Object,
   modalId: String,
 });
 
-// const emit = defineEmits(["close"]);
 const uploadedFile = ref(null);
-// const selectedBeneficialOwner = {
-//   fullLegalName: "XXX XXXX",
-// };
 
 const openUploadPopup = () => {
-  // await nextTick();
-  // $(".ui.small.modal").modal("destroy");
   const modalSelector = `#${props.modalId}`;
   $(modalSelector)
     .modal({
@@ -49,6 +43,7 @@ const openUploadPopup = () => {
     <div class="actions">
       <div class="ui cancel button" data-deny="true">Clear</div>
       <div class="ui approve button">Upload</div>
+      <!--TODO: Uploading indicates a status update?-->
     </div>
   </div>
 </template> 
