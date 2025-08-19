@@ -21,6 +21,13 @@ const openUploadPopup = () => {
     })
     .modal("show");
 };
+
+const onDrop = (event) => {
+  const files = event.dataTransfer.files;
+  if (files.length > 0) {
+    uploadedFile.value.files = files;
+  }
+};
 </script>
 
 <template>
@@ -34,7 +41,7 @@ const openUploadPopup = () => {
       <p>Drag and drop your files here or click to browse.</p>
     </div>
     <div class="content" id="file-upload-container">
-      <div id="file-upload-box">
+      <div id="file-upload-box" @dragover.prevent @drop.prevent="onDrop">
         <i class="big upload icon"></i>
         <p>Drag 'n' drop files here or click to select files</p>
         <input type="file" ref="uploadedFile" />
