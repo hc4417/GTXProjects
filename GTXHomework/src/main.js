@@ -1,3 +1,4 @@
+import 'devextreme/dist/css/dx.light.css';
 import { createApp } from 'vue'
 import router from './router'
 import { createPinia } from 'pinia'
@@ -7,6 +8,7 @@ import './assets/jquery/jquery'
 import 'fomantic-ui/dist/semantic.css'
 import 'fomantic-ui/dist/semantic.js'
 import './styles/main.css'
+import 'devextreme/dist/css/dx.light.css';
 
 const pinia = createPinia()
 

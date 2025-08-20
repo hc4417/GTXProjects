@@ -211,20 +211,5 @@ td.clickable:hover {
   border-top: 1px solid #ddd;
 }
 
-#file-upload-box{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 600px;
-  height: 400px;
-  padding: 1rem;
-  border-radius: 10px;
-  border-style: dotted;
-  color:#726f6f;
-}
 
-#file-upload-container{
-  display: flex;
-  justify-content: center;
-}
+

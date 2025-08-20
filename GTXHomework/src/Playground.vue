@@ -1,6 +1,7 @@
 <script setup>
 import UploadDocumentsModal from "./components/UploadDocumentsModal.vue";
-import { ref } from "vue";
+import DxDataGrid, { DxEditing, DxColumn } from "devextreme-vue/data-grid";
+import MidasData from "@/midas-connect-data.json";
 
 const owners = [
   { fullLegalName: "firstName1 lastName1" },
@@ -9,26 +10,24 @@ const owners = [
 </script>
 
 <template>
-  <!-- <button class="ui primary button" @click="openUploadPopup(bo)">
-    <i class="upload icon"></i> Upload
-  </button> -->
-  <table class="ui celled striped table">
-    <thead>
-      <tr>
-        <th>Beneficial Owner</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(bo, index) in owners" :key="index">
-        <td>{{ bo.fullLegalName }}</td>
-        <td>
-          <UploadDocumentsModal
-            :selectedBeneficialOwner="bo"
-            :modalId="'upload-modal-' + index"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <DxDataGrid
+    :data-source="MidasData"
+    :show-borders="true"
+    :show-row-lines="true"
+    :word-wrap-enabled="true"
+    :hover-state-enabled="true"
+    :row-alternation-enabled="true"
+  >
+    <DxColumn data-field="fullLegalName" caption="Beneficial Owner" />
+    <DxColumn data-field="documentName" />
+    <DxColumn data-field="documentId" />
+    <DxColumn data-field="status" />
+    <DxColumn caption="Action" cell-template="action-cell" alignment="center" />
+    <template #action-cell="{ data: beneficialOwner }">
+      <UploadDocumentsModal
+        :selectedBeneficialOwner="beneficialOwner.data"
+        :modalId="'upload-modal-' + index"
+      />
+    </template>
+  </DxDataGrid>
 </template> 

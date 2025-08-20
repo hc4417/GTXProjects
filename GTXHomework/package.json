@@ -15,11 +15,14 @@
     "pinia": "^3.0.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "devextreme": "24.2.6",
+    "devextreme-vue": "24.2.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
     "vite": "^6.2.4",
-    "vite-plugin-vue-devtools": "^7.7.2"
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "devextreme-themebuilder": "24.2.6"
   }
 }
