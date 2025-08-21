@@ -1,11 +1,13 @@
 [
     {
+        "id": 0,
         "fullLegalName":"XXXX XXX",
         "documentName": "DocX.pdf",
         "documentId": 123456,
         "status": "Incomplete"
     },
     {
+        "id": 1,
         "fullLegalName":"YYYY YYY",
         "documentName": "DocY.pdf",
         "documentId": 234561,

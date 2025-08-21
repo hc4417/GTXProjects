@@ -5,10 +5,11 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import './assets/jquery/jquery'
+import 'devextreme/dist/css/dx.light.css';
 import 'fomantic-ui/dist/semantic.css'
 import 'fomantic-ui/dist/semantic.js'
 import './styles/main.css'
-import 'devextreme/dist/css/dx.light.css';
+
 
 const pinia = createPinia()
 

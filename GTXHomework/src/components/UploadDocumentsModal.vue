@@ -1,14 +1,9 @@
-<script setup>
+  <script setup>
 import { onMounted, computed, ref, defineProps } from "vue";
 
 const props = defineProps({
   selectedBeneficialOwner: Object,
   modalId: String,
-});
-
-const uploadedFile = ref(null);
-const fileName = computed(() => {
-  return uploadedFile.name;
 });
 
 onMounted(() => {
@@ -34,12 +29,6 @@ onMounted(() => {
     });
 });
 
-const fileOnChange = (files) => {
-  if (files[0]) {
-    uploadedFile.value = files[0];
-  }
-};
-
 const openUploadPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector)
@@ -48,23 +37,49 @@ const openUploadPopup = () => {
 
       onApprove() {},
       onDeny() {
-        uploadedFile.value.value = "";
+        uploadedFile.value = null;
       },
     })
     .modal("show");
 };
 
-const onDrop = (event) => {
-  const files = event.dataTransfer.files;
-  if (files.length > 0) {
-    uploadedFile.value = files;
+const openFileDialog = () => {
+  fileInputEl.value && fileInputEl.value.click();
+};
+
+// Handling file input
+const fileOnChange = (file) => {
+  if (file) {
+    uploadedFile.value = file;
+    if (fileInputEl.value) fileInputEl.value.value = "";
   }
+};
+
+const fileInputEl = ref(null); // file input element
+const uploadedFile = ref(null); // file data
+
+const uploadedFileName = computed(() => {
+  return uploadedFile.value ? uploadedFile.value.name : "";
+});
+const uploadedFileSize = computed(() => {
+  return uploadedFile.value ? uploadedFile.value.size : "";
+});
+const fileSizeKb = computed(() => {
+  return uploadedFileSize.value
+    ? (uploadedFileSize.value / 1024).toFixed(2)
+    : "";
+});
+
+// Drag n drop
+const onDrop = (event) => {
+  const file = event.dataTransfer.files[0];
+  fileOnChange(file);
 };
 
 // const onDragover = (event) => {};
 </script>
 
-<template>
+  <template>
   <button class="ui basic button" @click="openUploadPopup()">
     <i class="upload icon"></i> Upload
   </button>
@@ -74,33 +89,38 @@ const onDrop = (event) => {
       Upload Documents for {{ selectedBeneficialOwner.fullLegalName }}
       <p>Drag and drop your files here or click to browse.</p>
     </div>
-    <div class="content file-upload-container">
-      <label for="fileInput" class="file-upload-box">
-        <!--TODO: Animation when file dragged in and out of upload box space-->
-        <input
-          type="file"
-          id="fileInput"
-          ref="uploadedFile"
-          @change="fileOnChange($event.target.files[0])"
-        />
-        <br /><i class="big upload icon"></i>
+    <div class="content file-upload-dropzone" @drop.prevent="onDrop">
+      <input
+        type="file"
+        class="file-input"
+        ref="fileInputEl"
+        @change="fileOnChange($event.target.files[0])"
+      />
 
-        <p class="drag-drop-caption">
-          Drag 'n' drop files here or click to select files
-          {{ fileName }}
-        </p>
-        <!--TODO: Display file name + size-->
-      </label>
+      <div class="file-upload-box" @click="openFileDialog">
+        <i class="big upload icon"></i>
+        <h3 v-if="!uploadedFile">
+          Drag 'n' drop files here, or click to select files
+        </h3>
+        <h3 v-if="uploadedFileName">
+          {{ uploadedFileName }} ({{ fileSizeKb }} KB)
+        </h3>
+      </div>
     </div>
     <div class="centered actions">
-      <div class="ui primary approve button">Upload</div>
+      <div
+        class="ui primary approve button"
+        :class="{ disabled: !uploadedFile }"
+      >
+        Upload
+      </div>
       <div class="ui cancel button" data-deny="true">Clear</div>
       <!--TODO: Uploading indicates a status update?-->
     </div>
   </div>
 </template> 
 
-<style scoped>
+  <style scoped>
 .file-upload-box {
   display: flex;
   justify-content: center;
@@ -119,13 +139,18 @@ const onDrop = (event) => {
   background: #ece7e7;
 }
 
-.file-upload-container {
-  display: flex;
-  justify-content: center;
+.file-upload-dropzone {
+  display: flex !important;
+  justify-content: center !important;
 }
 
-.hidden {
-  opacity: 0%;
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 .drag-drop-caption {

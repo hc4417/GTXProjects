@@ -20,13 +20,13 @@ const owners = [
   >
     <DxColumn data-field="fullLegalName" caption="Beneficial Owner" />
     <DxColumn data-field="documentName" />
-    <DxColumn data-field="documentId" />
+    <DxColumn data-field="documentId" alignment="left" />
     <DxColumn data-field="status" />
     <DxColumn caption="Action" cell-template="action-cell" alignment="center" />
     <template #action-cell="{ data: beneficialOwner }">
       <UploadDocumentsModal
         :selectedBeneficialOwner="beneficialOwner.data"
-        :modalId="'upload-modal-' + index"
+        :modalId="'upload-modal-' + beneficialOwner.data.id"
       />
     </template>
   </DxDataGrid>
