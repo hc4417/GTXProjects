@@ -218,3 +218,9 @@ td.clickable:hover {
 .dx-pager{
   color: white;
 }
+
+.dx-data-grid-container{
+  margin: 0 auto;
+  width: 90%;
+  height: 80%
+}

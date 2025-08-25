@@ -43,7 +43,11 @@ const openUploadPopup = () => {
       closable: false,
 
       onApprove() {
-        emit("statusUpdate", props.selectedBeneficialOwner.id);
+        const updatedOwner = {
+          ...props.selectedBeneficialOwner,
+          fileName: uploadedFileName.value,
+        };
+        emit("statusUpdate", updatedOwner);
       },
       onDeny() {
         uploadedFile.value = null;
