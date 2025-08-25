@@ -1,10 +1,12 @@
   <script setup>
-import { onMounted, computed, ref, defineProps } from "vue";
+import { onMounted, computed, ref, defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   selectedBeneficialOwner: Object,
   modalId: String,
 });
+
+const emit = defineEmits(["statusUpdate"]);
 
 onMounted(() => {
   console.log("The component was mounted.");
@@ -27,6 +29,11 @@ onMounted(() => {
       let file = e.originalEvent.dataTransfer.files[0];
       fileOnChange(file);
     });
+
+  $(fileInputEl.value).on("change", (e) => {
+    const file = e.target.files[0];
+    fileOnChange(file);
+  });
 });
 
 const openUploadPopup = () => {
@@ -35,7 +42,9 @@ const openUploadPopup = () => {
     .modal({
       closable: false,
 
-      onApprove() {},
+      onApprove() {
+        emit("statusUpdate", props.selectedBeneficialOwner.id);
+      },
       onDeny() {
         uploadedFile.value = null;
       },
@@ -70,13 +79,9 @@ const fileSizeKb = computed(() => {
     : "";
 });
 
-// Drag n drop
-const onDrop = (event) => {
-  const file = event.dataTransfer.files[0];
-  fileOnChange(file);
+const clearSelection = () => {
+  uploadedFile.value = null;
 };
-
-// const onDragover = (event) => {};
 </script>
 
   <template>
@@ -84,26 +89,23 @@ const onDrop = (event) => {
     <i class="upload icon"></i> Upload
   </button>
 
-  <div :id="modalId" class="ui tiny modal">
+  <div :id="modalId" class="ui tiny upload modal">
     <div class="header">
       Upload Documents for {{ selectedBeneficialOwner.fullLegalName }}
-      <p>Drag and drop your files here or click to browse.</p>
     </div>
-    <div class="content file-upload-dropzone" @drop.prevent="onDrop">
-      <input
-        type="file"
-        class="file-input"
-        ref="fileInputEl"
-        @change="fileOnChange($event.target.files[0])"
-      />
+    <div class="content file-upload-dropzone">
+      <input type="file" class="file-input" ref="fileInputEl" />
 
       <div class="file-upload-box" @click="openFileDialog">
-        <i class="big upload icon"></i>
+        <i class="huge upload icon"></i>
         <h3 v-if="!uploadedFile">
           Drag 'n' drop files here, or click to select files
         </h3>
         <h3 v-if="uploadedFileName">
           {{ uploadedFileName }} ({{ fileSizeKb }} KB)
+          <span @click.stop="clearSelection" title="Clear selection"
+            ><i class="red circle times icon"></i
+          ></span>
         </h3>
       </div>
     </div>
@@ -111,10 +113,11 @@ const onDrop = (event) => {
       <div
         class="ui primary approve button"
         :class="{ disabled: !uploadedFile }"
+        data-approve="true"
       >
         Upload
       </div>
-      <div class="ui cancel button" data-deny="true">Clear</div>
+      <div class="ui cancel button" data-deny="true">Cancel</div>
       <!--TODO: Uploading indicates a status update?-->
     </div>
   </div>
@@ -154,9 +157,13 @@ const onDrop = (event) => {
 }
 
 .drag-drop-caption {
-  font-size: 18px;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.upload.modal > .header {
+  background: #ebebeb;
 }
 </style>

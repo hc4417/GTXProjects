@@ -211,5 +211,10 @@ td.clickable:hover {
   border-top: 1px solid #ddd;
 }
 
+.dx-data-row {
+  height: 50px !important;
+}
 
-
+.dx-pager{
+  color: white;
+}
