@@ -46,6 +46,7 @@ const openUploadPopup = () => {
         const updatedOwner = {
           ...props.selectedBeneficialOwner,
           fileName: uploadedFileName.value,
+          fileUrl: fileUrl.value,
         };
         emit("statusUpdate", updatedOwner);
       },
@@ -64,12 +65,14 @@ const openFileDialog = () => {
 const fileOnChange = (file) => {
   if (file) {
     uploadedFile.value = file;
+    fileUrl.value = URL.createObjectURL(file);
     if (fileInputEl.value) fileInputEl.value.value = "";
   }
 };
 
 const fileInputEl = ref(null); // file input element
 const uploadedFile = ref(null); // file data
+const fileUrl = ref(null); // file URL
 
 const uploadedFileName = computed(() => {
   return uploadedFile.value ? uploadedFile.value.name : "";
@@ -85,6 +88,7 @@ const fileSizeKb = computed(() => {
 
 const clearSelection = () => {
   uploadedFile.value = null;
+  fileUrl.value = null;
 };
 </script>
 
@@ -98,7 +102,7 @@ const clearSelection = () => {
       Upload Documents for {{ selectedBeneficialOwner.fullLegalName }}
     </div>
     <div class="content file-upload-dropzone">
-      <input type="file" class="file-input" ref="fileInputEl" />
+      <input type="file" class="file-input" ref="fileInputEl" accept=".pdf" />
 
       <div class="file-upload-box" @click="openFileDialog">
         <i class="huge upload icon"></i>
@@ -138,12 +142,12 @@ const clearSelection = () => {
   padding: 1rem;
   border-radius: 10px;
   border-style: dotted;
-  color: #726f6f;
+  color: #b3aeae;
 }
 
 .file-upload-box.is-dragover {
-  border-color: rgb(134, 160, 199);
-  background: #ece7e7;
+  border-color: rgb(166, 187, 219);
+  background: #ebeff7;
 }
 
 .file-upload-dropzone {

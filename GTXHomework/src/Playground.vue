@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import UploadDocumentsModal from "./components/UploadDocumentsModal.vue";
+import PreviewFileUploadModal from "./components/PreviewFileUploadModal.vue";
 import DxDataGrid, {
   DxEditing,
   DxColumn,
@@ -11,12 +12,22 @@ import DxDataGrid, {
 import MidasData from "@/midas-connect-data.json";
 
 const reactiveMidasData = ref([...MidasData]);
+const previewUpload = ref(null);
 
 const handleStatusUpdate = (updatedOwner) => {
   const row = reactiveMidasData.value.find((r) => r.id === updatedOwner.id);
   if (row) {
     row.status = "Received";
     row.fileName = updatedOwner.fileName;
+    row.fileUrl = updatedOwner.fileUrl;
+  }
+};
+
+const onRowPrepared = (e) => {
+  if (e.rowType === "data") {
+    if (e.data.status == "Received") {
+      e.rowElement.classList.add("file-received-row");
+    }
   }
 };
 </script>
@@ -28,9 +39,9 @@ const handleStatusUpdate = (updatedOwner) => {
       :show-borders="true"
       :show-row-lines="true"
       :word-wrap-enabled="true"
-      :hover-state-enabled="true"
-      :row-alternation-enabled="true"
+      @row-prepared="onRowPrepared"
     >
+      >
       <DxHeaderFilter :visible="true" />
       <DxPaging :page-size="12" />
       <DxPager :show-info="true" :show-navigation-buttons="true" />
@@ -57,7 +68,14 @@ const handleStatusUpdate = (updatedOwner) => {
           :modalId="'upload-modal-' + beneficialOwner.data.id"
           @statusUpdate="handleStatusUpdate"
         />
-        <span v-else>{{ beneficialOwner.data.fileName }}</span>
+        <span v-else
+          >{{ beneficialOwner.data.fileName }}
+          <PreviewFileUploadModal
+            :modalId="'preview-modal-' + beneficialOwner.data.id"
+            :previewSrc="beneficialOwner.data.fileUrl"
+            :previewFileName="beneficialOwner.data.fileName"
+          />
+        </span>
       </template>
     </DxDataGrid>
   </div>

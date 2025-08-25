@@ -215,6 +215,10 @@ td.clickable:hover {
   height: 50px !important;
 }
 
+.dx-data-row:hover{
+  background-color: #fff8f2e3; /* Light yellow background on hover */
+}
+
 .dx-pager{
   color: white;
 }
@@ -223,4 +227,22 @@ td.clickable:hover {
   margin: 0 auto;
   width: 90%;
   height: 80%
+}
+
+.file-received-row{
+  background-color: #f3f3f3;
+}
+
+.file-received-row:hover{
+  background-color: #f3f3f3 !important;
+}
+
+.ui.modal .modal-times-header{
+  display:flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-icon{
+  cursor:pointer;
 }
