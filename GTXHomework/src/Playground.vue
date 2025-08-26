@@ -39,6 +39,7 @@ const onRowPrepared = (e) => {
       :show-borders="true"
       :show-row-lines="true"
       :word-wrap-enabled="true"
+      :row-alternation-enabled="true"
       @row-prepared="onRowPrepared"
     >
       >

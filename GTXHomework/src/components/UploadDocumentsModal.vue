@@ -10,7 +10,7 @@ const emit = defineEmits(["statusUpdate"]);
 
 onMounted(() => {
   console.log("The component was mounted.");
-  let $form = $(".file-upload-box");
+  let $form = $(`#${props.modalId} .file-upload-box`);
   $form
     .on(
       "drag dragstart dragend dragover dragenter dragleave drop",
@@ -74,12 +74,32 @@ const fileInputEl = ref(null); // file input element
 const uploadedFile = ref(null); // file data
 const fileUrl = ref(null); // file URL
 
+const fileValidityChecker = (file) => {
+  if (file) {
+    if (file.type !== "application/pdf") {
+      return false;
+    }
+
+    return true;
+  }
+};
+
 const uploadedFileName = computed(() => {
   return uploadedFile.value ? uploadedFile.value.name : "";
 });
+
+const uploadedFileNameDisplay = computed(() => {
+  if (!uploadedFile.value) {
+    return "";
+  }
+  const fileName = uploadedFile.value.name;
+  return fileName.length > 25 ? fileName.slice(0, 25) + "..." : fileName;
+});
+
 const uploadedFileSize = computed(() => {
   return uploadedFile.value ? uploadedFile.value.size : "";
 });
+
 const fileSizeKb = computed(() => {
   return uploadedFileSize.value
     ? (uploadedFileSize.value / 1024).toFixed(2)
@@ -103,30 +123,62 @@ const clearSelection = () => {
     </div>
     <div class="content file-upload-dropzone">
       <input type="file" class="file-input" ref="fileInputEl" accept=".pdf" />
-
-      <div class="file-upload-box" @click="openFileDialog">
-        <i class="huge upload icon"></i>
-        <h3 v-if="!uploadedFile">
-          Drag 'n' drop files here, or click to select files
-        </h3>
-        <h3 v-if="uploadedFileName">
-          {{ uploadedFileName }} ({{ fileSizeKb }} KB)
-          <span @click.stop="clearSelection" title="Clear selection"
-            ><i class="red circle times icon"></i
-          ></span>
-        </h3>
+      <div
+        :class="{
+          'successful-upload-box': uploadedFile,
+          'file-upload-box': !uploadedFile,
+          'error-upload-box':
+            uploadedFile && !fileValidityChecker(uploadedFile),
+        }"
+        @click="openFileDialog"
+      >
+        <i
+          :class="{
+            huge: true,
+            'check circle outline icon': uploadedFile,
+            'times circle outline icon':
+              uploadedFile && !fileValidityChecker(uploadedFile),
+            'upload icon': !uploadedFile,
+          }"
+        ></i>
+        <div class="upload-box-text">
+          <h3 v-if="!uploadedFile">
+            Drag 'n' drop files here, or click to select files
+          </h3>
+          <h3 v-else :title="uploadedFileName">
+            {{ uploadedFileNameDisplay }} ({{ fileSizeKb }} KB)
+            <i
+              class="circle times icon"
+              @click.stop="clearSelection"
+              title="Clear selection"
+            ></i>
+            <div
+              style="display: flex; justify-content: center"
+              v-if="!fileValidityChecker(uploadedFile)"
+            >
+              File must be a PDF
+            </div>
+            <div
+              style="display: flex; justify-content: center"
+              v-if="fileValidityChecker(uploadedFile)"
+            >
+              File ready for upload
+            </div>
+          </h3>
+        </div>
       </div>
     </div>
     <div class="centered actions">
       <div
         class="ui primary approve button"
-        :class="{ disabled: !uploadedFile }"
+        :class="{
+          disabled: !uploadedFile || !fileValidityChecker(uploadedFile),
+        }"
         data-approve="true"
       >
         Upload
       </div>
       <div class="ui cancel button" data-deny="true">Cancel</div>
-      <!--TODO: Uploading indicates a status update?-->
     </div>
   </div>
 </template> 
@@ -137,6 +189,7 @@ const clearSelection = () => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 1rem;
   width: 500px;
   height: 300px;
   padding: 1rem;
@@ -145,9 +198,39 @@ const clearSelection = () => {
   color: #b3aeae;
 }
 
+.successful-upload-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border-style: dotted;
+  color: #8fb694;
+}
+
+.error-upload-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border-style: dotted;
+  color: #b16f6f;
+  background: #f5e6e6;
+}
+
+/*FIXME: dragover styling doesn't apply consistently*/
 .file-upload-box.is-dragover {
-  border-color: rgb(166, 187, 219);
-  background: #ebeff7;
+  border-color: rgb(166, 187, 219) !important;
+  background: #ebeff7 !important;
 }
 
 .file-upload-dropzone {
