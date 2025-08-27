@@ -226,7 +226,7 @@ const logout = () => {
         </div>
       </div>
       <div class="description">
-        <div class="ui header" style="padding-left: 10%">
+        <div class="ui header" style="padding-left: 10%; color: black">
           Date: {{ apptDate }} <br />
           Time: {{ extractTimeForDisplay }}
         </div>
