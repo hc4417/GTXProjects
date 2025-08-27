@@ -1,11 +1,13 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed, ref } from "vue";
 
 const props = defineProps({
   modalId: String,
   previewSrc: String,
   previewFileName: String,
 });
+
+const reactiveFileName = ref(`${props.previewFileName}`);
 
 const openPreviewPopup = () => {
   const modalSelector = `#${props.modalId}`;
@@ -17,13 +19,20 @@ const closePreviewPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector).modal("hide");
 };
+
+const uploadedFileNameDisplay = computed(() => {
+  const fileName = reactiveFileName.value;
+  return fileName.length > 60 ? fileName.slice(0, 60) + "..." : fileName;
+});
 </script>
 
 <template>
   <i class="eye icon" title="Preview" @click="openPreviewPopup"></i>
   <div :id="modalId" class="ui small upload modal">
     <div class="header modal-times-header">
-      Preview {{ previewFileName }}
+      <span class="preview-header" :title="reactiveFileName"
+        >Preview {{ uploadedFileNameDisplay }}</span
+      >
       <i
         class="times icon close-icon"
         title="Exit Preview"
@@ -33,10 +42,30 @@ const closePreviewPopup = () => {
     <div class="content" style="margin: 0 auto">
       <iframe
         :src="previewSrc + '#zoom=85'"
-        width="700"
-        height="600"
-        style="margin: 0 auto; border: 1px solid #ddd; border-radius: 5px"
+        class="file-preview-frame"
       ></iframe>
     </div>
   </div>
 </template>
+
+<style scoped>
+.file-preview-frame {
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 700px;
+  height: 600px;
+}
+
+.eye.icon:hover {
+  cursor: pointer;
+}
+
+.preview-header {
+  font-weight: bold;
+}
+
+.preview-header:hover {
+  cursor: default;
+}
+</style>

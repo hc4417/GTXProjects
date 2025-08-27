@@ -12,17 +12,19 @@ import DxDataGrid, {
 import MidasData from "@/midas-connect-data.json";
 
 const reactiveMidasData = ref([...MidasData]);
-const previewUpload = ref(null);
 
+// Retrieves data updates
 const handleStatusUpdate = (updatedOwner) => {
   const row = reactiveMidasData.value.find((r) => r.id === updatedOwner.id);
   if (row) {
     row.status = "Received";
     row.fileName = updatedOwner.fileName;
+    row.fileNameDisplay = updatedOwner.fileNameDisplay;
     row.fileUrl = updatedOwner.fileUrl;
   }
 };
 
+// Changes row style to indicate where documents are receieved
 const onRowPrepared = (e) => {
   if (e.rowType === "data") {
     if (e.data.status == "Received") {
@@ -63,14 +65,15 @@ const onRowPrepared = (e) => {
         alignment="center"
       />
       <template #action-cell="{ data: beneficialOwner }">
+        <!--Action cell content changes depending on bo doc status -->
         <UploadDocumentsModal
           v-if="beneficialOwner.data.status !== 'Received'"
           :selectedBeneficialOwner="beneficialOwner.data"
           :modalId="'upload-modal-' + beneficialOwner.data.id"
           @statusUpdate="handleStatusUpdate"
         />
-        <span v-else
-          >{{ beneficialOwner.data.fileName }}
+        <span v-else :title="beneficialOwner.data.fileName"
+          >{{ beneficialOwner.data.fileNameDisplay }}
           <PreviewFileUploadModal
             :modalId="'preview-modal-' + beneficialOwner.data.id"
             :previewSrc="beneficialOwner.data.fileUrl"
@@ -81,3 +84,4 @@ const onRowPrepared = (e) => {
     </DxDataGrid>
   </div>
 </template> 
+

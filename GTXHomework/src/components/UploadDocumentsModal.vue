@@ -1,4 +1,4 @@
-  <script setup>
+<script setup>
 import { onMounted, computed, ref, defineProps, defineEmits } from "vue";
 
 const props = defineProps({
@@ -36,6 +36,7 @@ onMounted(() => {
   });
 });
 
+// Opens file upload modal
 const openUploadPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector)
@@ -46,6 +47,7 @@ const openUploadPopup = () => {
         const updatedOwner = {
           ...props.selectedBeneficialOwner,
           fileName: uploadedFileName.value,
+          fileNameDisplay: uploadedFileNameDisplay,
           fileUrl: fileUrl.value,
         };
         emit("statusUpdate", updatedOwner);
@@ -57,11 +59,12 @@ const openUploadPopup = () => {
     .modal("show");
 };
 
+// Opens file input
 const openFileDialog = () => {
   fileInputEl.value && fileInputEl.value.click();
 };
 
-// Handling file input
+// Handles file input
 const fileOnChange = (file) => {
   if (file) {
     uploadedFile.value = file;
@@ -70,10 +73,11 @@ const fileOnChange = (file) => {
   }
 };
 
-const fileInputEl = ref(null); // file input element
-const uploadedFile = ref(null); // file data
-const fileUrl = ref(null); // file URL
+const fileInputEl = ref(null); // File input element
+const uploadedFile = ref(null); // File input data
+const fileUrl = ref(null); // File input URL
 
+// Checks validity of input file type
 const fileValidityChecker = (file) => {
   if (file) {
     if (file.type !== "application/pdf") {
@@ -82,8 +86,10 @@ const fileValidityChecker = (file) => {
 
     return true;
   }
+  return false;
 };
 
+// Computing attributes related to the uploaded file
 const uploadedFileName = computed(() => {
   return uploadedFile.value ? uploadedFile.value.name : "";
 });
@@ -106,13 +112,26 @@ const fileSizeKb = computed(() => {
     : "";
 });
 
+// Determines styling of file upload box
+const getUploadBoxClass = computed(() => {
+  if (!uploadedFile.value) {
+    return null;
+  }
+  if (fileValidityChecker(uploadedFile.value)) {
+    return "successful-upload-box";
+  } else {
+    return "error-upload-box";
+  }
+});
+
+// Clears file input
 const clearSelection = () => {
   uploadedFile.value = null;
   fileUrl.value = null;
 };
 </script>
 
-  <template>
+<template>
   <button class="ui basic button" @click="openUploadPopup()">
     <i class="upload icon"></i> Upload
   </button>
@@ -123,48 +142,50 @@ const clearSelection = () => {
     </div>
     <div class="content file-upload-dropzone">
       <input type="file" class="file-input" ref="fileInputEl" accept=".pdf" />
-      <div
-        :class="{
-          'successful-upload-box': uploadedFile,
-          'file-upload-box': !uploadedFile,
-          'error-upload-box':
-            uploadedFile && !fileValidityChecker(uploadedFile),
-        }"
-        @click="openFileDialog"
-      >
+      <div class="file-upload-box" :class="getUploadBoxClass">
         <i
           :class="{
             huge: true,
-            'check circle outline icon': uploadedFile,
-            'times circle outline icon':
-              uploadedFile && !fileValidityChecker(uploadedFile),
+            'check circle outline icon': fileValidityChecker(uploadedFile),
+            'times icon': uploadedFile && !fileValidityChecker(uploadedFile),
             'upload icon': !uploadedFile,
           }"
         ></i>
         <div class="upload-box-text">
-          <h3 v-if="!uploadedFile">
-            Drag 'n' drop files here, or click to select files
-          </h3>
-          <h3 v-else :title="uploadedFileName">
-            {{ uploadedFileNameDisplay }} ({{ fileSizeKb }} KB)
-            <i
-              class="circle times icon"
-              @click.stop="clearSelection"
-              title="Clear selection"
-            ></i>
-            <div
+          <div v-if="!uploadedFile">
+            <h3>
+              Drop files here or
+              <a class="browse-link" @click="openFileDialog">browse</a>
+            </h3>
+          </div>
+          <div v-else>
+            <h3
               style="display: flex; justify-content: center"
               v-if="!fileValidityChecker(uploadedFile)"
             >
               File must be a PDF
-            </div>
-            <div
+            </h3>
+            <h3
               style="display: flex; justify-content: center"
               v-if="fileValidityChecker(uploadedFile)"
             >
               File ready for upload
-            </div>
-          </h3>
+            </h3>
+            <h3>
+              <span :title="uploadedFileName"
+                >{{ uploadedFileNameDisplay }}
+              </span>
+              <i
+                class="circle times icon"
+                @click.stop="clearSelection"
+                title="Clear selection"
+              >
+              </i>
+            </h3>
+            <p style="display: flex; justify-content: center">
+              ({{ fileSizeKb }} KB)
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -183,13 +204,13 @@ const clearSelection = () => {
   </div>
 </template> 
 
-  <style scoped>
+<style scoped>
 .file-upload-box {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   width: 500px;
   height: 300px;
   padding: 1rem;
@@ -205,11 +226,12 @@ const clearSelection = () => {
   flex-direction: column;
   width: 500px;
   height: 300px;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
   border-radius: 10px;
   border-style: dotted;
-  color: #8fb694;
+  color: #339933;
+  background: #fdfff5;
 }
 
 .error-upload-box {
@@ -219,18 +241,18 @@ const clearSelection = () => {
   flex-direction: column;
   width: 500px;
   height: 300px;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
   border-radius: 10px;
   border-style: dotted;
-  color: #b16f6f;
-  background: #f5e6e6;
+  color: #db2828;
+  background: #fff6f6;
 }
 
-/*FIXME: dragover styling doesn't apply consistently*/
 .file-upload-box.is-dragover {
   border-color: rgb(166, 187, 219) !important;
-  background: #ebeff7 !important;
+  background: #f1f4f8 !important;
+  color: #b3aeae;
 }
 
 .file-upload-dropzone {
@@ -256,5 +278,10 @@ const clearSelection = () => {
 
 .upload.modal > .header {
   background: #ebebeb;
+}
+
+.upload-box-text h3 {
+  margin: 0.5rem 0;
+  line-height: 1.2;
 }
 </style>

@@ -190,12 +190,6 @@ td.clickable:hover {
   background: rgba(252, 236, 193, 0.688);
 }
 
-
-/*
-td.clickable:hover {
-  background: rgba(176, 211, 241, 0.5);
-}*/
-
 .ui.visible.sidebar.vertical.menu {
   background-color: white;
   width: 250px;
@@ -211,12 +205,13 @@ td.clickable:hover {
   border-top: 1px solid #ddd;
 }
 
+/* MIDAS Document Management styles below*/
 .dx-data-row {
   height: 50px !important;
 }
 
 .dx-data-row:hover{
-  background-color: #fff8f2e3; /* Light yellow background on hover */
+  background-color: #fff8f2e3; 
 }
 
 .dx-pager{
@@ -245,4 +240,20 @@ td.clickable:hover {
 
 .close-icon{
   cursor:pointer;
+}
+
+.browse-link{
+  font-weight: bold;
+  text-decoration: underline;
+  color:#185eaf;
+}
+
+.browse-link:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.upload-box-text .circle.times.icon{
+  cursor:pointer;
+  margin-left: 0.25rem;
 }
