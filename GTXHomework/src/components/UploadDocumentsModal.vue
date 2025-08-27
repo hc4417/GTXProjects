@@ -36,7 +36,7 @@ onMounted(() => {
   });
 });
 
-// Opens file upload modal
+// Opens file upload modal with unique modalId, corresponds to bo document
 const openUploadPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector)

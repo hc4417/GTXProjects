@@ -8,6 +8,7 @@ import DxDataGrid, {
   DxPaging,
   DxPager,
   DxHeaderFilter,
+  DxSearchPanel,
 } from "devextreme-vue/data-grid";
 import MidasData from "@/midas-connect-data.json";
 
@@ -45,6 +46,7 @@ const onRowPrepared = (e) => {
       @row-prepared="onRowPrepared"
     >
       >
+      <DxSearchPanel :visible="true" />
       <DxHeaderFilter :visible="true" />
       <DxPaging :page-size="12" />
       <DxPager :show-info="true" :show-navigation-buttons="true" />

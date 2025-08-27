@@ -9,17 +9,20 @@ const props = defineProps({
 
 const reactiveFileName = ref(`${props.previewFileName}`);
 
+// Opens document preview modal with unique modalId, corresponds to bo document
 const openPreviewPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector).modal("destroy");
   $(modalSelector).modal("show");
 };
 
+// Closes document preview modal
 const closePreviewPopup = () => {
   const modalSelector = `#${props.modalId}`;
   $(modalSelector).modal("hide");
 };
 
+// Handles file name for display
 const uploadedFileNameDisplay = computed(() => {
   const fileName = reactiveFileName.value;
   return fileName.length > 60 ? fileName.slice(0, 60) + "..." : fileName;
@@ -39,6 +42,7 @@ const uploadedFileNameDisplay = computed(() => {
         @click="closePreviewPopup"
       ></i>
     </div>
+    <!--Displays pdf preview-->
     <div class="content" style="margin: 0 auto">
       <iframe
         :src="previewSrc + '#zoom=85'"
@@ -53,8 +57,8 @@ const uploadedFileNameDisplay = computed(() => {
   margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 700px;
-  height: 600px;
+  width: 100%;
+  height: 70vh;
 }
 
 .eye.icon:hover {
