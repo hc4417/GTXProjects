@@ -99,6 +99,7 @@ const onRowPrepared = (e) => {
         data-type="string"
         alignment="left"
       />
+      <DxColumn data-field="groupCode"></DxColumn>
       <DxColumn data-field="status" alignment="center" :width="200" />
       <DxColumn
         :allow-header-filtering="false"

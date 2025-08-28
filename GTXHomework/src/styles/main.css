@@ -254,3 +254,8 @@ td.clickable:hover {
   cursor:pointer;
   margin-left: 0.25rem;
 }
+
+#group-code-dropdown{
+  position: absolute;
+  top: 40px;
+}
