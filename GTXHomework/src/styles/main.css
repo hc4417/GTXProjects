@@ -258,4 +258,15 @@ td.clickable:hover {
 #group-code-dropdown{
   position: absolute;
   top: 40px;
+  left: 5rem;
+  z-index: 9999;
+}
+
+#bo-data-grid {
+  vertical-align: top;
+  position: absolute;
+  top: 40px;
+  width: 90vw;
+  left: 5rem;
+  right: 5rem;
 }

@@ -83,6 +83,7 @@ const onRowPrepared = (e) => {
       :word-wrap-enabled="true"
       :row-alternation-enabled="true"
       @row-prepared="onRowPrepared"
+      :element-attr="{ id: 'bo-data-grid' }"
     >
       <DxHeaderFilter :visible="true" />
       <!--TODO: Auto adjust page size based on screen ratio-->
@@ -99,7 +100,10 @@ const onRowPrepared = (e) => {
         data-type="string"
         alignment="left"
       />
-      <DxColumn data-field="groupCode"></DxColumn>
+      <DxColumn
+        :allow-header-filtering="false"
+        data-field="groupCode"
+      ></DxColumn>
       <DxColumn data-field="status" alignment="center" :width="200" />
       <DxColumn
         :allow-header-filtering="false"
@@ -130,5 +134,3 @@ const onRowPrepared = (e) => {
   </div>
 </template> 
 
-<style scoped>
-</style>
