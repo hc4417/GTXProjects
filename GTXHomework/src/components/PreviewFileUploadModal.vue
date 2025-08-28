@@ -31,6 +31,7 @@ const uploadedFileNameDisplay = computed(() => {
 
 <template>
   <i class="eye icon" title="Preview" @click="openPreviewPopup"></i>
+
   <div :id="modalId" class="ui small upload modal">
     <div class="header modal-times-header">
       <span class="preview-header" :title="reactiveFileName"
@@ -43,7 +44,7 @@ const uploadedFileNameDisplay = computed(() => {
       ></i>
     </div>
     <!--Displays pdf preview-->
-    <div class="content" style="margin: 0 auto">
+    <div class="content">
       <iframe
         :src="previewSrc + '#zoom=85'"
         class="file-preview-frame"
@@ -71,5 +72,9 @@ const uploadedFileNameDisplay = computed(() => {
 
 .preview-header:hover {
   cursor: default;
+}
+
+.content {
+  margin: 0 auto;
 }
 </style>

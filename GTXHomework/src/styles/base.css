@@ -60,7 +60,6 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
   background: linear-gradient(to bottom, #7ba79f, #334761);
   transition:
     color 0.5s,

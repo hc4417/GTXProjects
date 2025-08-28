@@ -99,7 +99,7 @@ const uploadedFileNameDisplay = computed(() => {
     return "";
   }
   const fileName = uploadedFile.value.name;
-  return fileName.length > 25 ? fileName.slice(0, 25) + "..." : fileName;
+  return fileName.length > 21 ? fileName.slice(0, 21) + "..." : fileName;
 });
 
 const uploadedFileSize = computed(() => {
@@ -154,21 +154,15 @@ const clearSelection = () => {
         <div class="upload-box-text">
           <div v-if="!uploadedFile">
             <h3>
-              Drop files here or
+              Drop files here or&nbsp;
               <a class="browse-link" @click="openFileDialog">browse</a>
             </h3>
           </div>
           <div v-else>
-            <h3
-              style="display: flex; justify-content: center"
-              v-if="!fileValidityChecker(uploadedFile)"
-            >
+            <h3 v-if="!fileValidityChecker(uploadedFile)">
               File must be a PDF
             </h3>
-            <h3
-              style="display: flex; justify-content: center"
-              v-if="fileValidityChecker(uploadedFile)"
-            >
+            <h3 v-if="fileValidityChecker(uploadedFile)">
               File ready for upload
             </h3>
             <h3>
@@ -182,9 +176,7 @@ const clearSelection = () => {
               >
               </i>
             </h3>
-            <p style="display: flex; justify-content: center">
-              ({{ fileSizeKb }} KB)
-            </p>
+            <p>({{ fileSizeKb }} KB)</p>
           </div>
         </div>
       </div>
@@ -283,5 +275,12 @@ const clearSelection = () => {
 .upload-box-text h3 {
   margin: 0.5rem 0;
   line-height: 1.2;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-box-text p {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import UploadDocumentsModal from "./components/UploadDocumentsModal.vue";
 import PreviewFileUploadModal from "./components/PreviewFileUploadModal.vue";
 import DxDataGrid, {
@@ -9,12 +9,34 @@ import DxDataGrid, {
   DxPager,
   DxHeaderFilter,
   DxSearchPanel,
+  DxRemoteOperations,
 } from "devextreme-vue/data-grid";
 import MidasData from "@/midas-connect-data.json";
+import GroupCodeData from "@/midas-connect-group-code-data.json";
 
 const reactiveMidasData = ref([...MidasData]);
 
-// Retrieves data updates
+onMounted(() => {
+  $("#group-code-dropdown").dropdown({
+    onChange: function (value) {
+      selectedGroupCode.value = value;
+    },
+  });
+});
+
+const selectedGroupCode = ref(null);
+
+// Filters documents based on selected group code
+const filteredMidasData = computed(() => {
+  if (!selectedGroupCode.value) {
+    return reactiveMidasData.value;
+  }
+  return reactiveMidasData.value.filter(
+    (item) => item.groupCode === selectedGroupCode.value
+  );
+});
+
+// Retrieves document data updates
 const handleStatusUpdate = (updatedOwner) => {
   const row = reactiveMidasData.value.find((r) => r.id === updatedOwner.id);
   if (row) {
@@ -25,7 +47,7 @@ const handleStatusUpdate = (updatedOwner) => {
   }
 };
 
-// Changes row style to indicate where documents are receieved
+// Reacts to document status change
 const onRowPrepared = (e) => {
   if (e.rowType === "data") {
     if (e.data.status == "Received") {
@@ -37,30 +59,50 @@ const onRowPrepared = (e) => {
 
 <template>
   <div class="dx-data-grid-container">
+    <div class="ui clearable selection dropdown" id="group-code-dropdown">
+      <input type="hidden" name="code" />
+      <div class="default text">Sort by: Group Code</div>
+      <i class="dropdown icon"></i>
+      <div class="scrollhint menu">
+        <div
+          class="item"
+          v-for="code in GroupCodeData"
+          :key="code.id"
+          :data-value="code.groupCode"
+          style="display: flex"
+        >
+          <div>{{ code.groupCode }}</div>
+        </div>
+      </div>
+    </div>
+
     <DxDataGrid
-      :data-source="reactiveMidasData"
+      :data-source="filteredMidasData"
       :show-borders="true"
       :show-row-lines="true"
       :word-wrap-enabled="true"
       :row-alternation-enabled="true"
       @row-prepared="onRowPrepared"
     >
-      >
-      <DxSearchPanel :visible="true" />
       <DxHeaderFilter :visible="true" />
-      <DxPaging :page-size="12" />
+      <!--TODO: Auto adjust page size based on screen ratio-->
+      <DxPaging :page-size="10" />
       <DxPager :show-info="true" :show-navigation-buttons="true" />
+      <DxSearchPanel :visible="true" />
+      <DxRemoteOperations :filtering="false" />
 
       <DxColumn data-field="fullLegalName" caption="Beneficial Owner" />
       <DxColumn :allow-header-filtering="false" data-field="documentName" />
       <DxColumn
         :allow-header-filtering="false"
         data-field="documentId"
+        data-type="string"
         alignment="left"
       />
       <DxColumn data-field="status" alignment="center" :width="200" />
       <DxColumn
         :allow-header-filtering="false"
+        :allow-search="false"
         :width="200"
         caption="Action"
         cell-template="action-cell"
@@ -87,3 +129,5 @@ const onRowPrepared = (e) => {
   </div>
 </template> 
 
+<style scoped>
+</style>

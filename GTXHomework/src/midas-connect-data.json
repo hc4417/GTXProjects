@@ -1,6 +1,7 @@
 [
     {
         "id": 0,
+        "groupCode": "ABC123",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocX.pdf",
         "documentId": 123456,
@@ -8,6 +9,7 @@
     },
     {
         "id": 1,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocY.pdf",
         "documentId": 234561,
@@ -15,6 +17,7 @@
     },
     {
         "id": 2,
+        "groupCode": "CAB321",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocZ.pdf",
         "documentId": 345612,
@@ -22,6 +25,7 @@
     },
     {
         "id": 3,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXY.pdf",
         "documentId": 456123,
@@ -29,6 +33,7 @@
     },
     {
         "id": 4,
+        "groupCode": "CAB321",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXY.pdf",
         "documentId": 561234,
@@ -36,6 +41,7 @@
     },
     {
         "id": 5,
+        "groupCode": "BCA231",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocZX.pdf",
         "documentId": 612345,
@@ -43,6 +49,7 @@
     },
     {
         "id": 6,
+        "groupCode": "BCA231",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXZ.pdf",
         "documentId": 71234,
@@ -50,6 +57,7 @@
     },
     {
         "id": 7,
+        "groupCode": "ABC123",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocA.pdf",
         "documentId": 123456,
@@ -57,6 +65,7 @@
     },
     {
         "id": 8,
+        "groupCode": "CAB321",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocB.pdf",
         "documentId": 234561,
@@ -64,6 +73,7 @@
     },
     {
         "id": 9,
+        "groupCode": "CAB321",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocC.pdf",
         "documentId": 345612,
@@ -71,6 +81,7 @@
     },
     {
         "id": 10,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocE.pdf",
         "documentId": 456123,
@@ -78,6 +89,7 @@
     },
     {
         "id": 11,
+        "groupCode": "BCA231",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocFX.pdf",
         "documentId": 561234,
@@ -85,6 +97,7 @@
     },
     {
         "id": 12,
+        "groupCode": "ABC123",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocGH.pdf",
         "documentId": 612345,
@@ -92,6 +105,7 @@
     },
     {
         "id": 13,
+        "groupCode": "BCA231",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocYZ.pdf",
         "documentId": 71234,
@@ -99,6 +113,7 @@
     },
     {
         "id": 14,
+        "groupCode": "BCA231",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocX.pdf",
         "documentId": 123456,
@@ -106,6 +121,7 @@
     },
     {
         "id": 15,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocY.pdf",
         "documentId": 234561,
@@ -113,6 +129,7 @@
     },
     {
         "id": 16,
+        "groupCode": "ABC123",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocZ.pdf",
         "documentId": 345612,
@@ -120,6 +137,7 @@
     },
     {
         "id": 17,
+        "groupCode": "CAB321",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXY.pdf",
         "documentId": 456123,
@@ -127,6 +145,7 @@
     },
     {
         "id": 18,
+        "groupCode": "BCA231",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXY.pdf",
         "documentId": 561234,
@@ -134,6 +153,7 @@
     },
     {
         "id": 19,
+        "groupCode": "CAB321",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocZX.pdf",
         "documentId": 612345,
@@ -141,6 +161,7 @@
     },
     {
         "id": 20,
+        "groupCode": "CAB321",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocXZ.pdf",
         "documentId": 71234,
@@ -148,6 +169,7 @@
     },
     {
         "id": 21,
+        "groupCode": "BCA231",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocA.pdf",
         "documentId": 123456,
@@ -155,6 +177,7 @@
     },
     {
         "id": 22,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocB.pdf",
         "documentId": 234561,
@@ -162,6 +185,7 @@
     },
     {
         "id": 23,
+        "groupCode": "BCA231",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocC.pdf",
         "documentId": 345612,
@@ -169,6 +193,7 @@
     },
     {
         "id": 24,
+        "groupCode": "CAB321",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocE.pdf",
         "documentId": 456123,
@@ -176,6 +201,7 @@
     },
     {
         "id": 25,
+        "groupCode": "ABC123",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocFX.pdf",
         "documentId": 561234,
@@ -183,6 +209,7 @@
     },
     {
         "id": 26,
+        "groupCode": "CAB321",
         "fullLegalName":"XXXX XXX",
         "documentName": "DocGH.pdf",
         "documentId": 612345,
@@ -190,6 +217,7 @@
     },
     {
         "id": 27,
+        "groupCode": "BCA231",
         "fullLegalName":"YYYY YYY",
         "documentName": "DocYZ.pdf",
         "documentId": 71234,

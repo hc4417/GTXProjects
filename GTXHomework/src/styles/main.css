@@ -69,14 +69,6 @@
   .blue {
     background: rgb(184, 208, 231);
   }
-
-  /*.confirmed {
-    background: rgb(174, 214, 162);
-  }
-
-  .unconfirmed {
-    background: rgb(243, 243, 243);
-  }*/
 }
 
 .confirmed {
@@ -154,7 +146,6 @@
 
 .profile-card {
   background: #e7eaf0;
-  color: black;
   width: 600px;
   height: 400px;
   padding: 1rem;
@@ -222,9 +213,14 @@ td.clickable:hover {
 .dx-data-grid-container{
   margin: 0 auto;
   width: 90%;
-  height: 80%
+  height: 70%;
+
 }
 
+.dx-data-grid {
+  display: flex;
+  
+}
 .file-received-row{
   background-color: #f3f3f3;
 }
